@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centrifugal Pump | Pro Simulator</title>
+    <title>Centrifugal Pump | Pro Engineering Simulator</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -22,20 +22,43 @@
             --accent-yellow: #f59e0b;
         }
 
-        body { margin: 0; padding: 0; font-family: 'Cairo', sans-serif; background: var(--bg-base); color: var(--text-main); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
-        header { height: 65px; background: #0f1423; border-bottom: 2px solid var(--accent-blue); display: flex; justify-content: space-between; align-items: center; padding: 0 25px; box-sizing: border-box; }
+        body { 
+            margin: 0; padding: 0; 
+            font-family: 'Cairo', sans-serif; 
+            background: var(--bg-base); color: var(--text-main); 
+            height: 100vh; display: flex; flex-direction: column; overflow: hidden;
+        }
+
+        header { 
+            height: 65px; background: #0f1423; border-bottom: 2px solid var(--accent-blue);
+            display: flex; justify-content: space-between; align-items: center; padding: 0 25px; box-sizing: border-box;
+        }
         h1 { margin: 0; font-size: 1.4rem; font-weight: 800; color: #fff; }
         .lang-btn { background: transparent; color: var(--accent-blue); border: 1px solid var(--accent-blue); padding: 6px 18px; border-radius: 6px; cursor: pointer; font-weight: 600; transition: 0.3s; }
         .lang-btn:hover { background: var(--accent-blue); color: #fff; }
 
-        .app-grid { display: grid; grid-template-columns: 320px 1fr 450px; height: calc(100vh - 65px); }
-        .side-panel { background: var(--panel-bg); border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color); padding: 20px; overflow-y: auto; box-sizing: border-box; }
+        .app-grid {
+            display: grid;
+            grid-template-columns: 320px 1fr 450px; 
+            height: calc(100vh - 65px);
+        }
+
+        .side-panel {
+            background: var(--panel-bg);
+            border-left: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+        
         .side-panel::-webkit-scrollbar { width: 6px; }
         .side-panel::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
 
         .category-group { margin-bottom: 20px; }
         .category-title { color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: 700; border-bottom: 1px solid #334155; padding-bottom: 5px;}
         .main-item { font-weight: 600; color: var(--text-main); padding: 8px 0; margin-top: 10px;}
+        
         .sub-item-list { list-style: none; padding: 0; margin: 5px 0 0 0; border-right: 2px solid #334155;}
         [dir="ltr"] .sub-item-list { border-right: none; border-left: 2px solid #334155; }
         .sub-item-list li { padding: 10px 15px; margin-bottom: 4px; border-radius: 4px; cursor: pointer; transition: 0.2s; font-size: 0.9rem; color: #cbd5e1; margin-right: 10px;}
@@ -47,20 +70,39 @@
         .viewport-container { position: relative; background: #000; }
         #canvas-container { width: 100%; height: 100%; outline: none; }
         
-        .env-controls { position: absolute; top: 15px; left: 15px; background: rgba(15, 20, 35, 0.8); backdrop-filter: blur(8px); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; flex-direction: column; gap: 12px; z-index: 10; }
+        .env-controls {
+            position: absolute; top: 15px; left: 15px;
+            background: rgba(15, 20, 35, 0.8); backdrop-filter: blur(8px);
+            padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);
+            display: flex; flex-direction: column; gap: 12px; z-index: 10;
+        }
         .color-row { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; }
         .color-btn { width: 20px; height: 20px; border-radius: 50%; border: 1px solid #fff; cursor: pointer; }
         .opacity-slider { width: 120px; accent-color: var(--accent-blue); }
 
-        .section-box { background: #1e2433; border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; margin-bottom: 20px; }
-        .section-title { margin: 0 0 15px 0; font-size: 1.1rem; color: var(--accent-blue); border-bottom: 1px solid var(--border-color); padding-bottom: 10px; font-weight: 700; }
+        .section-box {
+            background: #1e2433; border: 1px solid var(--border-color);
+            border-radius: 8px; padding: 20px; margin-bottom: 20px;
+        }
+        .section-title {
+            margin: 0 0 15px 0; font-size: 1.1rem; color: var(--accent-blue);
+            border-bottom: 1px solid var(--border-color); padding-bottom: 10px; font-weight: 700;
+        }
 
         .input-group { margin-bottom: 15px; }
         .input-group-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem;}
-        .number-input { background: #0b0f19; border: 1px solid #334155; color: #fff; padding: 4px 8px; border-radius: 4px; width: 80px; text-align: center; font-family: 'Fira Code', monospace; }
+        .number-input { 
+            background: #0b0f19; border: 1px solid #334155; color: #fff; 
+            padding: 4px 8px; border-radius: 4px; width: 80px; text-align: center;
+            font-family: 'Fira Code', monospace;
+        }
         input[type="range"] { width: 100%; cursor: pointer; accent-color: var(--accent-blue); }
 
-        .warning-box { background: rgba(239, 68, 68, 0.1); border-right: 4px solid var(--accent-red); padding: 10px 15px; border-radius: 4px; font-size: 0.85rem; color: var(--accent-red); margin-top: 10px; display: none; font-weight: 600; }
+        .warning-box {
+            background: rgba(239, 68, 68, 0.1); border-right: 4px solid var(--accent-red);
+            padding: 10px 15px; border-radius: 4px; font-size: 0.85rem; color: var(--accent-red);
+            margin-top: 10px; display: none; font-weight: 600;
+        }
         [dir="ltr"] .warning-box { border-right: none; border-left: 4px solid var(--accent-red); }
 
         .data-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px dashed #334155; padding-bottom: 8px;}
@@ -68,9 +110,16 @@
         .data-value { font-family: 'Fira Code', monospace; font-size: 1.15rem; font-weight: bold; direction: ltr;}
 
         .theory-text { font-size: 0.95rem; line-height: 1.8; color: #cbd5e1; text-align: justify; margin-bottom: 15px;}
-        .math-box { background: #0b0f19; border: 1px solid #334155; border-radius: 6px; padding: 15px; font-family: 'Fira Code', monospace; font-size: 0.9rem; direction: ltr; text-align: left; line-height: 1.7; }
+        .math-box {
+            background: #0b0f19; border: 1px solid #334155; border-radius: 6px;
+            padding: 15px; font-family: 'Fira Code', monospace; font-size: 0.9rem;
+            direction: ltr; text-align: left; line-height: 1.7;
+        }
         .math-highlight { color: var(--accent-green); font-size: 1.1rem; font-weight: bold;}
 
+        [lang="ar"] .en-only { display: none; }
+        [lang="en"] .ar-only { display: none; }
+        
         #loading-msg, #error-msg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 15px 30px; background: #1e2433; border: 1px solid var(--accent-blue); border-radius: 8px; font-weight: bold; z-index: 100; direction: ltr;}
         #error-msg { display: none; border-color: var(--accent-red); color: var(--accent-red); text-align: center;}
     </style>
@@ -105,12 +154,12 @@
                 <div class="main-item"><span class="ar-only">▸ المضخات الترددية</span><span class="en-only">▸ Reciprocating Pumps</span></div>
             </div>
 
-            <div class="section-box">
+            <div class="section-box" id="theory-container">
                 <h3 class="section-title" id="theory-title">مبدأ العمل</h3>
                 <p class="theory-text" id="theory-desc"></p>
             </div>
 
-            <div class="section-box" style="border-right: 4px solid var(--accent-yellow);">
+            <div class="section-box" style="border-right: 4px solid var(--accent-yellow);" id="usage-container">
                 <h3 class="section-title" style="color: var(--accent-yellow);"><span class="ar-only">الأهمية في قطاع النفط</span><span class="en-only">Oil & Gas Applications</span></h3>
                 <p class="theory-text" id="usage-desc"></p>
             </div>
@@ -123,6 +172,12 @@
                     <div class="color-btn" style="background: #000000;" onclick="changeBg('#000000')"></div>
                     <div class="color-btn" style="background: #1e293b;" onclick="changeBg('#1e293b')"></div>
                     <div class="color-btn" style="background: #e2e8f0;" onclick="changeBg('#e2e8f0')"></div>
+                </div>
+                <div class="color-row">
+                    <span class="ar-only">المضخة:</span><span class="en-only">Pump:</span>
+                    <div class="color-btn" style="background: #94a3b8;" onclick="changePumpColor(0x94a3b8)"></div>
+                    <div class="color-btn" style="background: #f59e0b;" onclick="changePumpColor(0xf59e0b)"></div>
+                    <div class="color-btn" style="background: #0ea5e9;" onclick="changePumpColor(0x0ea5e9)"></div>
                 </div>
                 <div class="color-row">
                     <span class="ar-only">الشفافية:</span><span class="en-only">Opacity:</span>
@@ -169,7 +224,9 @@
                     <div>ΔP_actual = <span id="calc-design-dp2">4.20</span> × (<span id="calc-rpm">2900</span> / <span id="calc-design-rpm2">2900</span>)²</div>
                     <div style="color: var(--accent-blue);">ΔP_actual = <span id="calc-dp">4.20</span> bar</div>
                     <br>
+                    <!-- هنا قمت بإصلاح الأخطاء المفقودة التي تسببت في الخلل -->
                     <div>P_out = P_in + ΔP_actual</div>
+                    <div>P_out = <span id="calc-pin">1.00</span> + <span id="calc-dp2">4.20</span></div>
                     <div class="math-highlight">P_out = <span id="calc-pout">5.20</span> bar</div>
                 </div>
             </div>
@@ -294,11 +351,18 @@
             }
         }
 
+        function changePumpColor(hexColor) {
+            modelMeshes.forEach(mesh => {
+                if(mesh.material && mesh.material.color) {
+                    mesh.material.color.setHex(hexColor);
+                }
+            });
+        }
+
         function changePumpOpacity() {
             const val = parseFloat(document.getElementById('slider-opacity').value);
             modelMeshes.forEach(mesh => {
                 try {
-                    // تطبيق الشفافية بأمان
                     if(mesh.material) {
                         mesh.material.transparent = true;
                         mesh.material.opacity = val;
@@ -392,7 +456,7 @@
             particleSystem = new THREE.Points(geometry, material);
             scene.add(particleSystem);
 
-            // مسار آمن جداً ومبسط لضمان عدم حدوث خطأ هندسي
+            // مسار هندسي آمن 100% يمنع تعليق النظام بغض النظر عن أبعاد الموديل
             const p1 = new THREE.Vector3(0, size.y*scale/2, -1.5);
             const p2 = new THREE.Vector3(0, size.y*scale/2, 0);
             const p3 = new THREE.Vector3(0.5, (size.y*scale/2) + 0.5, 0);
@@ -419,20 +483,18 @@
                     try {
                         currentModel = gltf.scene;
                         
-                        // تمركز وتصغير آمن جداً
                         const box = new THREE.Box3().setFromObject(currentModel);
                         const size = box.getSize(new THREE.Vector3());
                         const center = box.getCenter(new THREE.Vector3());
                         
                         let maxDim = Math.max(size.x, size.y, size.z);
-                        if (maxDim === 0) maxDim = 1;
+                        if (maxDim === 0 || isNaN(maxDim)) maxDim = 1;
                         const scale = 2 / maxDim; 
                         
                         currentModel.scale.set(scale, scale, scale);
                         currentModel.position.sub(center.clone().multiplyScalar(scale));
                         currentModel.position.y += (size.y * scale) / 2;
                         
-                        // تعديل شفافية آمن يتجاهل الأخطاء
                         const currentOpacity = parseFloat(document.getElementById('slider-opacity').value) || 0.4;
                         currentModel.traverse((child) => {
                             if (child.isMesh) {
@@ -440,9 +502,12 @@
                                 if (!name.includes('impeller') && !name.includes('rotor') && !name.includes('shaft')) {
                                     modelMeshes.push(child);
                                     if(child.material) {
-                                        child.material.transparent = true;
-                                        child.material.opacity = currentOpacity;
-                                        child.material.depthWrite = false;
+                                        let mats = Array.isArray(child.material) ? child.material : [child.material];
+                                        mats.forEach(mat => {
+                                            mat.transparent = true;
+                                            mat.opacity = currentOpacity;
+                                            mat.depthWrite = false;
+                                        });
                                     }
                                 }
                             }
@@ -450,10 +515,8 @@
 
                         scene.add(currentModel);
 
-                        // إنشاء الجزيئات بمسار آمن
                         createParticlesSafely(center, scale, size);
 
-                        // تشغيل الأنيميشن
                         if (gltf.animations && gltf.animations.length > 0) {
                             mixer = new THREE.AnimationMixer(currentModel);
                             gltf.animations.forEach((clip) => mixer.clipAction(clip).play());
