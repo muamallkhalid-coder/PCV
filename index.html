@@ -157,7 +157,7 @@
                 
                 <div class="main-item"><span class="ar-only">▾ مضخات الطرد المركزي</span><span class="en-only">▾ Centrifugal Pumps</span></div>
                 <ul class="sub-item-list">
-                    <!-- تم ربط الأزرار بقاعدة البيانات البرمجية -->
+                    <!-- تم وضع ./ قبل اسم الملف لكي يعمل على GitHub Pages -->
                     <li class="active" onclick="loadPumpData('centrifugal_single', this)">
                         <span class="ar-only">أحادية المرحلة (Single-Stage)</span><span class="en-only">Single-Stage</span>
                     </li>
@@ -233,7 +233,6 @@
 
             <div class="section-box">
                 <h3 class="section-title"><span class="ar-only">القوانين والحسابات (Affinity Laws)</span><span class="en-only">Calculations</span></h3>
-                <!-- معادلات ماثجاكس -->
                 <div style="font-size: 1.1rem; text-align: center; margin: 10px 0;">
                     $$\frac{H_2}{H_1} = \left( \frac{N_2}{N_1} \right)^2$$
                 </div>
@@ -273,11 +272,11 @@
 
     <script>
         // ==========================================
-        // قاعدة البيانات الهندسية للمضخات (Dynamic Database)
+        // قاعدة البيانات الهندسية للمضخات (محدثة مع مسارات GitHub الصحيحة)
         // ==========================================
         const pumpsDB = {
             'centrifugal_single': {
-                file: 'pump_animated.glb',
+                file: './pump_animated.glb', // مسار نسبي ليعمل على GitHub
                 designRPM: 2900,
                 designDeltaP: 4.2,
                 title_ar: 'مبدأ العمل (أحادية المرحلة)',
@@ -288,7 +287,7 @@
                 usage_en: '• Fluid transfer in short pipelines.<br>• Cooling and circulation in heat exchangers.<br>• Low to medium pressure pumping.'
             },
             'centrifugal_multi': {
-                file: 'multistage_pump_flow_animated.glb', // تم التحديث لاسم ملفك
+                file: './multistage_pump_flow_animated.glb', // مسار نسبي ليعمل على GitHub
                 designRPM: 3500, 
                 designDeltaP: 15.5, 
                 title_ar: 'مبدأ العمل (متعددة المراحل)',
@@ -302,7 +301,6 @@
 
         let activePumpKey = 'centrifugal_single';
 
-        // تحديث النصوص بناءً على الاختيار واللغة
         function updateUIContent() {
             const data = pumpsDB[activePumpKey];
             const isAr = currentLang === 'ar';
@@ -319,7 +317,6 @@
             calculatePhysics(); 
         }
 
-        // تبديل اللغة الشامل
         let currentLang = 'ar';
         function toggleLanguage() {
             const htmlTag = document.getElementById('html-root');
@@ -332,7 +329,6 @@
             updateUIContent();
         }
 
-        // اختيار مضخة من القائمة
         function loadPumpData(key, listItem) {
             document.querySelectorAll('.sub-item-list li').forEach(li => li.classList.remove('active'));
             listItem.classList.add('active');
@@ -342,9 +338,6 @@
             loadModel(pumpsDB[key].file);
         }
 
-        // ==========================================
-        // إعداد بيئة 3D
-        // ==========================================
         const container = document.getElementById('canvas-container');
         const scene = new THREE.Scene();
         scene.background = new THREE.Color('#000000'); 
@@ -363,7 +356,6 @@
         const ambientLight = new THREE.AmbientLight(0xffffff, 1.2); scene.add(ambientLight);
         const dirLight = new THREE.DirectionalLight(0xffffff, 1.5); dirLight.position.set(5, 10, 5); scene.add(dirLight);
 
-        // التحكم بالبيئة
         let pumpMaterials = []; 
 
         function changeBg(colorHex) {
@@ -392,9 +384,6 @@
             });
         }
 
-        // ==========================================
-        // المنطق الرياضي والتحذيرات الهندسية
-        // ==========================================
         let particleSpeedMultiplier = 1.0; 
 
         function syncInputs(type, source) {
@@ -439,7 +428,6 @@
             const currentDeltaP = designDeltaP * Math.pow(speedRatio, 2); 
             const currentPOut = pin + currentDeltaP;
 
-            // تحديث DOM
             document.getElementById('calc-rpm').innerText = rpm;
             document.getElementById('calc-dp').innerText = currentDeltaP.toFixed(2);
             document.getElementById('calc-pin').innerText = pin.toFixed(2);
@@ -456,9 +444,6 @@
             particleSpeedMultiplier = Math.max(speedRatio, 0.05);
         }
 
-        // ==========================================
-        // تحميل الموديل ونظام الجزيئات النقطية
-        // ==========================================
         let currentModel, mixer; 
         const clock = new THREE.Clock();
         const loader = new THREE.GLTFLoader();
@@ -508,14 +493,11 @@
             loader.load(filename, function(gltf) {
                 currentModel = gltf.scene;
                 
-                // التلوين الديناميكي لأجزاء المضخة
                 currentModel.traverse((child) => {
                     if (child.isMesh) {
-                        // استثناء المراوح الداخلية (إن وجدت) لتبقى بلونها
                         if (child.name.toLowerCase().includes('impeller') || child.name.toLowerCase().includes('arrow')) {
                             // لا تغير لون المروحة
                         } else {
-                            // تغيير الغلاف الخارجي
                             child.material = new THREE.MeshStandardMaterial({
                                 color: 0x94a3b8, metalness: 0.7, roughness: 0.2,
                                 transparent: true, opacity: parseFloat(document.getElementById('slider-opacity').value), 
@@ -536,14 +518,12 @@
                 currentModel.position.y += (size.y * scale) / 2;
                 scene.add(currentModel);
 
-                // بناء المسار للجزيئات
                 const fixZ = -0.020; 
                 function transformPoint(pt) {
                     let newPt = pt.clone().multiplyScalar(scale).sub(center.clone().multiplyScalar(scale)); 
                     newPt.y += (size.y * scale) / 2; return newPt;
                 }
 
-                // المسار العام (سيطبق على الموديلين بشكل تقريبي)
                 const sCenter = transformPoint(new THREE.Vector3(-0.002, -0.002, fixZ));
                 const sOutlet = transformPoint(new THREE.Vector3(0.292, 0.757, fixZ));
                 const R = sOutlet.x * 0.85; 
@@ -561,7 +541,6 @@
 
                 flowCurve = new THREE.CatmullRomCurve3(curvePoints, false, 'catmullrom', 0.5);
                 
-                // توليد الجزيئات بدلاً من المائع الصلب
                 createParticles(flowCurve);
 
                 if (gltf.animations && gltf.animations.length > 0) {
@@ -579,9 +558,6 @@
             });
         }
 
-        // ==========================================
-        // حلقة التحريك (Animation Loop)
-        // ==========================================
         const colorLow = new THREE.Color(0x0ea5e9); 
         const colorHigh = new THREE.Color(0xef4444); 
 
@@ -617,7 +593,6 @@
             renderer.render(scene, camera);
         }
         
-        // التهيئة الأولية
         updateUIContent();
         loadModel(pumpsDB[activePumpKey].file); 
         animate();
