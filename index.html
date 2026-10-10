@@ -59,6 +59,19 @@
         .side-panel::-webkit-scrollbar { width: 6px; }
         .side-panel::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
 
+        /* القائمة الجانبية المحدثة (Sub-categories) */
+        .category-group { margin-bottom: 20px; }
+        .category-title { color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: 700; border-bottom: 1px solid #334155; padding-bottom: 5px;}
+        .main-item { font-weight: 600; color: var(--text-main); padding: 8px 0; margin-top: 10px;}
+        
+        .sub-item-list { list-style: none; padding: 0; margin: 5px 0 0 0; border-right: 2px solid #334155;}
+        [dir="ltr"] .sub-item-list { border-right: none; border-left: 2px solid #334155; }
+        .sub-item-list li { padding: 10px 15px; margin-bottom: 4px; border-radius: 4px; cursor: pointer; transition: 0.2s; font-size: 0.9rem; color: #cbd5e1; margin-right: 10px;}
+        [dir="ltr"] .sub-item-list li { margin-right: 0; margin-left: 10px; }
+        .sub-item-list li:hover { background: rgba(255,255,255,0.05); color: #fff; }
+        .sub-item-list li.active { background: rgba(14, 165, 233, 0.15); color: var(--accent-blue); font-weight: bold; border-right: 3px solid var(--accent-blue);}
+        [dir="ltr"] .sub-item-list li.active { border-right: none; border-left: 3px solid var(--accent-blue); }
+
         /* منطقة 3D */
         .viewport-container { position: relative; background: #000; }
         #canvas-container { width: 100%; height: 100%; outline: none; }
@@ -100,6 +113,7 @@
             padding: 10px 15px; border-radius: 4px; font-size: 0.85rem; color: var(--accent-red);
             margin-top: 10px; display: none; font-weight: 600;
         }
+        [dir="ltr"] .warning-box { border-right: none; border-left: 4px solid var(--accent-red); }
 
         /* القراءات (Readings) */
         .data-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px dashed #334155; padding-bottom: 8px;}
@@ -118,7 +132,7 @@
         [lang="ar"] .en-only { display: none; }
         [lang="en"] .ar-only { display: none; }
         
-        #loading-msg, #error-msg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 15px 30px; background: #1e2433; border: 1px solid var(--accent-blue); border-radius: 8px; font-weight: bold; }
+        #loading-msg, #error-msg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 15px 30px; background: #1e2433; border: 1px solid var(--accent-blue); border-radius: 8px; font-weight: bold; z-index: 100;}
         #error-msg { display: none; border-color: var(--accent-red); color: var(--accent-red);}
     </style>
 </head>
@@ -128,73 +142,56 @@
         <h1>
             <span class="ar-only">محاكي المعدات النفطية | </span>
             <span class="en-only">O&G Equipment Simulator | </span>
-            <span style="color: var(--accent-green);">Centrifugal Pump V-PRO</span>
+            <span style="color: var(--accent-green);">Pumps V-PRO</span>
         </h1>
         <button class="lang-btn" onclick="toggleLanguage()">English</button>
     </header>
 
     <div class="app-grid">
         
-        <!-- العمود الأول: الشرح والنظريات -->
+        <!-- العمود الأول: القائمة الجانبية والشرح -->
         <aside class="side-panel">
-            <div class="section-box">
-                <h3 class="section-title"><span class="ar-only">مبدأ العمل (Working Principle)</span><span class="en-only">Working Principle</span></h3>
-                <p class="theory-text">
-                    <span class="ar-only">
-                        تُعد <b>مضخات الطرد المركزي</b> من أهم المعدات الدوارة. تعمل عن طريق تحويل الطاقة الحركية (Kinetic Energy) المتولدة من دوران المروحة (Impeller) إلى طاقة ضغط (Pressure Head). يدخل المائع من مركز المروحة بضغط منخفض، ثم يُطرد نحو المحيط الخارجي بواسطة قوة الطرد المركزي، حيث يقوم الغلاف الحلزوني (Volute Casing) بتقليل سرعة المائع لتحويلها إلى ضغط إضافي.
-                    </span>
-                    <span class="en-only">
-                        <b>Centrifugal pumps</b> convert rotational kinetic energy into pressure head. Fluid enters the impeller eye at low pressure and is accelerated outwards by centrifugal force. The volute casing then slows the fluid down, converting kinetic energy into pressure.
-                    </span>
-                </p>
+            <!-- قائمة المعدات -->
+            <div class="category-group">
+                <div class="category-title"><span class="ar-only">تصنيفات المضخات</span><span class="en-only">Pump Categories</span></div>
+                
+                <div class="main-item"><span class="ar-only">▾ مضخات الطرد المركزي</span><span class="en-only">▾ Centrifugal Pumps</span></div>
+                <ul class="sub-item-list">
+                    <!-- تم ربط الأزرار بقاعدة البيانات البرمجية -->
+                    <li class="active" onclick="loadPumpData('centrifugal_single', this)">
+                        <span class="ar-only">أحادية المرحلة (Single-Stage)</span><span class="en-only">Single-Stage</span>
+                    </li>
+                    <li onclick="loadPumpData('centrifugal_multi', this)">
+                        <span class="ar-only">متعددة المراحل (Multi-Stage)</span><span class="en-only">Multi-Stage</span>
+                    </li>
+                </ul>
+
+                <div class="main-item"><span class="ar-only">▸ المضخات الترددية</span><span class="en-only">▸ Reciprocating Pumps</span></div>
             </div>
 
-            <div class="section-box" style="border-right: 4px solid var(--accent-yellow);">
-                <h3 class="section-title" style="color: var(--accent-yellow);"><span class="ar-only">الأهمية في قطاع النفط</span><span class="en-only">Oil & Gas Applications</span></h3>
-                <p class="theory-text">
-                    <span class="ar-only">
-                        في القطاع النفطي، تُفضل هذه المضخات لكفاءتها العالية وقدرتها على ضخ كميات ضخمة ومستمرة. <b>أبرز استخداماتها:</b><br>
-                        • ضخ النفط الخام في خطوط التصدير (Crude Export).<br>
-                        • حقن المياه في الآبار للحفاظ على ضغط المكمن (Water Injection).<br>
-                        • تدوير السوائل في مصافي التكرير ومعامل الغاز (Amine Circulation).
-                    </span>
-                    <span class="en-only">
-                        Highly favored in O&G for their reliability and massive continuous flow rates. <b>Key Applications:</b><br>
-                        • Crude oil export pipelines.<br>
-                        • High-pressure water injection for reservoir maintenance.<br>
-                        • Fluid circulation in refineries and gas plants (e.g., Amine).
-                    </span>
-                </p>
+            <!-- الشرح النظري (يتم تحديثه برمجياً) -->
+            <div class="section-box" id="theory-container">
+                <h3 class="section-title" id="theory-title">مبدأ العمل</h3>
+                <p class="theory-text" id="theory-desc"></p>
             </div>
-            
-            <div class="section-box">
-                <h3 class="section-title"><span class="ar-only">النموذج الرياضي (Affinity Laws)</span><span class="en-only">Mathematical Model</span></h3>
-                <p class="theory-text">
-                    <span class="ar-only">ينص <b>قانون التقارب</b> على أن طاقة الضغط (Head) تتناسب طردياً مع <b>مربع</b> سرعة الدوران ($N$).</span>
-                    <span class="en-only">The <b>Affinity Law</b> states that the pump Head is proportional to the <b>square</b> of the speed ($N$).</span>
-                </p>
-                <!-- استخدام LaTeX للمعادلات الأكاديمية -->
-                <div style="font-size: 1.1rem; text-align: center; margin: 15px 0;">
-                    $$\frac{H_2}{H_1} = \left( \frac{N_2}{N_1} \right)^2$$
-                </div>
-                <div style="font-size: 1.1rem; text-align: center; margin: 15px 0;">
-                    $$P_{out} = P_{in} + \Delta P$$
-                </div>
+
+            <div class="section-box" style="border-right: 4px solid var(--accent-yellow);" id="usage-container">
+                <h3 class="section-title" style="color: var(--accent-yellow);"><span class="ar-only">الأهمية في قطاع النفط</span><span class="en-only">Oil & Gas Applications</span></h3>
+                <p class="theory-text" id="usage-desc"></p>
             </div>
         </aside>
 
         <!-- العمود الثاني: العرض ثلاثي الأبعاد -->
         <main class="viewport-container">
-            <!-- التحكم بالبيئة 3D -->
             <div class="env-controls">
                 <div class="color-row">
-                    <span class="ar-only">الخلفية:</span><span class="en-only">Background:</span>
+                    <span class="ar-only">الخلفية:</span><span class="en-only">Bg:</span>
                     <div class="color-btn" style="background: #000000;" onclick="changeBg('#000000')"></div>
                     <div class="color-btn" style="background: #1e293b;" onclick="changeBg('#1e293b')"></div>
                     <div class="color-btn" style="background: #e2e8f0;" onclick="changeBg('#e2e8f0')"></div>
                 </div>
                 <div class="color-row">
-                    <span class="ar-only">المضخة:</span><span class="en-only">Pump Color:</span>
+                    <span class="ar-only">المضخة:</span><span class="en-only">Pump:</span>
                     <div class="color-btn" style="background: #94a3b8;" onclick="changePumpColor(0x94a3b8)"></div>
                     <div class="color-btn" style="background: #f59e0b;" onclick="changePumpColor(0xf59e0b)"></div>
                     <div class="color-btn" style="background: #0ea5e9;" onclick="changePumpColor(0x0ea5e9)"></div>
@@ -235,15 +232,18 @@
             </div>
 
             <div class="section-box">
-                <h3 class="section-title"><span class="ar-only">الحسابات الحية (Live Calculation)</span><span class="en-only">Live Calculations</span></h3>
+                <h3 class="section-title"><span class="ar-only">القوانين والحسابات (Affinity Laws)</span><span class="en-only">Calculations</span></h3>
+                <!-- معادلات ماثجاكس -->
+                <div style="font-size: 1.1rem; text-align: center; margin: 10px 0;">
+                    $$\frac{H_2}{H_1} = \left( \frac{N_2}{N_1} \right)^2$$
+                </div>
                 <div class="math-box">
-                    <div>ΔP_design = 4.20 bar @ 2900 RPM</div>
+                    <div>ΔP_design = <span id="calc-design-dp">4.20</span> bar @ <span id="calc-design-rpm">2900</span> RPM</div>
                     <br>
-                    <div>ΔP_actual = 4.20 × (<span id="calc-rpm">2900</span> / 2900)²</div>
+                    <div>ΔP_actual = <span id="calc-design-dp2">4.20</span> × (<span id="calc-rpm">2900</span> / <span id="calc-design-rpm2">2900</span>)²</div>
                     <div style="color: var(--accent-blue);">ΔP_actual = <span id="calc-dp">4.20</span> bar</div>
                     <br>
                     <div>P_out = P_in + ΔP_actual</div>
-                    <div>P_out = <span id="calc-pin">1.00</span> + <span id="calc-dp2">4.20</span></div>
                     <div class="math-highlight">P_out = <span id="calc-pout">5.20</span> bar</div>
                 </div>
             </div>
@@ -272,7 +272,54 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 
     <script>
-        // إعدادات اللغة
+        // ==========================================
+        // قاعدة البيانات الهندسية للمضخات (Dynamic Database)
+        // ==========================================
+        const pumpsDB = {
+            'centrifugal_single': {
+                file: 'pump_animated.glb',
+                designRPM: 2900,
+                designDeltaP: 4.2,
+                title_ar: 'مبدأ العمل (أحادية المرحلة)',
+                title_en: 'Working Principle (Single-Stage)',
+                desc_ar: 'تعتمد مضخات الطرد المركزي أحادية المرحلة (مروحة واحدة) على تحويل الطاقة الحركية إلى طاقة ضغط. يدخل المائع من مركز المروحة بضغط منخفض، ثم يُطرد نحو المحيط الخارجي بواسطة قوة الطرد المركزي.',
+                desc_en: 'Single-stage centrifugal pumps use a single impeller to convert kinetic energy into pressure head. Fluid enters the impeller eye and is accelerated outwards.',
+                usage_ar: '• ضخ السوائل في خطوط الأنابيب القصيرة.<br>• التدوير والتبريد في المبادلات الحرارية.<br>• رفع المياه والنفط بضغوط منخفضة إلى متوسطة.',
+                usage_en: '• Fluid transfer in short pipelines.<br>• Cooling and circulation in heat exchangers.<br>• Low to medium pressure pumping.'
+            },
+            'centrifugal_multi': {
+                file: 'multistage_pump_flow_animated.glb', // تم التحديث لاسم ملفك
+                designRPM: 3500, 
+                designDeltaP: 15.5, 
+                title_ar: 'مبدأ العمل (متعددة المراحل)',
+                title_en: 'Working Principle (Multi-Stage)',
+                desc_ar: 'تتكون المضخة متعددة المراحل من عدة مراوح (Impellers) مركبة على نفس عمود الدوران (Shaft) بشكل متتالٍ. يمر المائع من مروحة لأخرى، وفي كل مرحلة يكتسب ضغطاً إضافياً، مما يولد طاقة ضغط (Head) هائلة جداً لا يمكن لمروحة واحدة تحقيقها.',
+                desc_en: 'Multi-stage pumps consist of multiple impellers connected in series on the same shaft. Fluid passes from one stage to the next, accumulating immense pressure head impossible for a single stage.',
+                usage_ar: '• <b>حقن المياه (Water Injection):</b> لحقن الماء بضغوط هائلة داخل آبار النفط للحفاظ على ضغط المكمن.<br>• <b>خطوط التصدير (Export Pumps):</b> لضخ النفط الخام لمسافات طويلة.<br>• تغذية المراجل (Boiler Feed Pumps) في محطات الطاقة.',
+                usage_en: '• <b>Water Injection:</b> Injecting water into oil wells at extreme pressures.<br>• <b>Export Pipelines:</b> Pumping crude oil over long distances.<br>• Boiler feed pumps in power generation.'
+            }
+        };
+
+        let activePumpKey = 'centrifugal_single';
+
+        // تحديث النصوص بناءً على الاختيار واللغة
+        function updateUIContent() {
+            const data = pumpsDB[activePumpKey];
+            const isAr = currentLang === 'ar';
+            
+            document.getElementById('theory-title').innerText = isAr ? data.title_ar : data.title_en;
+            document.getElementById('theory-desc').innerHTML = isAr ? data.desc_ar : data.desc_en;
+            document.getElementById('usage-desc').innerHTML = isAr ? data.usage_ar : data.usage_en;
+            
+            document.getElementById('calc-design-dp').innerText = data.designDeltaP.toFixed(2);
+            document.getElementById('calc-design-dp2').innerText = data.designDeltaP.toFixed(2);
+            document.getElementById('calc-design-rpm').innerText = data.designRPM;
+            document.getElementById('calc-design-rpm2').innerText = data.designRPM;
+
+            calculatePhysics(); 
+        }
+
+        // تبديل اللغة الشامل
         let currentLang = 'ar';
         function toggleLanguage() {
             const htmlTag = document.getElementById('html-root');
@@ -282,6 +329,17 @@
             } else {
                 currentLang = 'ar'; htmlTag.setAttribute('lang', 'ar'); htmlTag.setAttribute('dir', 'rtl'); btn.textContent = 'English';
             }
+            updateUIContent();
+        }
+
+        // اختيار مضخة من القائمة
+        function loadPumpData(key, listItem) {
+            document.querySelectorAll('.sub-item-list li').forEach(li => li.classList.remove('active'));
+            listItem.classList.add('active');
+            
+            activePumpKey = key;
+            updateUIContent();
+            loadModel(pumpsDB[key].file);
         }
 
         // ==========================================
@@ -305,12 +363,11 @@
         const ambientLight = new THREE.AmbientLight(0xffffff, 1.2); scene.add(ambientLight);
         const dirLight = new THREE.DirectionalLight(0xffffff, 1.5); dirLight.position.set(5, 10, 5); scene.add(dirLight);
 
-        // وظائف التحكم بالبيئة 3D (تغيير ألوان وشفافية)
-        let pumpMaterials = []; // مصفوفة لحفظ مواد غلاف المضخة
+        // التحكم بالبيئة
+        let pumpMaterials = []; 
 
         function changeBg(colorHex) {
             scene.background = new THREE.Color(colorHex);
-            // إضافة شبكة (Grid) إذا كانت الخلفية رمادية فاتحة لتبدو كبيئة تصميم CAD
             if(colorHex === '#e2e8f0' && !scene.getObjectByName('grid')) {
                 const grid = new THREE.GridHelper(10, 20, 0x888888, 0xcccccc);
                 grid.name = 'grid'; scene.add(grid);
@@ -330,7 +387,7 @@
             const val = parseFloat(document.getElementById('slider-opacity').value);
             pumpMaterials.forEach(mat => {
                 mat.opacity = val;
-                mat.transparent = val < 1.0; // إلغاء الشفافية برمجياً إذا كانت 100%
+                mat.transparent = val < 1.0; 
                 mat.depthWrite = val === 1.0;
             });
         }
@@ -354,7 +411,10 @@
             let rpm = parseFloat(document.getElementById('num-rpm').value);
             let pin = parseFloat(document.getElementById('num-pin').value);
             
-            // 1. نظام التحذيرات الأوتوماتيكي (Alarms)
+            const activeData = pumpsDB[activePumpKey];
+            const designRPM = activeData.designRPM;
+            const designDeltaP = activeData.designDeltaP; 
+            
             const warnRpm = document.getElementById('warn-rpm');
             const warnPin = document.getElementById('warn-pin');
             warnRpm.style.display = 'none'; warnPin.style.display = 'none';
@@ -362,7 +422,7 @@
             if (rpm < 1200) {
                 warnRpm.style.display = 'block';
                 warnRpm.innerText = currentLang === 'ar' ? '⚠️ تحذير: سرعة منخفضة! خطر عدم تخطي الضغط العكسي (Deadheading).' : '⚠️ Warning: Low speed! Risk of deadheading.';
-            } else if (rpm > 3600) {
+            } else if (rpm > 4000) {
                 warnRpm.style.display = 'block';
                 warnRpm.innerText = currentLang === 'ar' ? '⚠️ تحذير: سرعة مفرطة! خطر الاهتزاز العنيف والتجويف (Cavitation).' : '⚠️ Warning: Overspeed! High risk of severe vibration and cavitation.';
             }
@@ -375,14 +435,11 @@
                 warnPin.innerText = currentLang === 'ar' ? '⚠️ تحذير: ضغط سحب عالي! خطر تلف موانع التسرب الميكانيكية.' : '⚠️ Warning: High suction! Risk of mechanical seal failure.';
             }
 
-            // 2. الحسابات الرياضية
-            const designRPM = 2900;
-            const designDeltaP = 4.2; 
             const speedRatio = rpm / designRPM;
-            const currentDeltaP = designDeltaP * Math.pow(speedRatio, 2); // Affinity Law
+            const currentDeltaP = designDeltaP * Math.pow(speedRatio, 2); 
             const currentPOut = pin + currentDeltaP;
 
-            // 3. تحديث واجهة المستخدم (DOM)
+            // تحديث DOM
             document.getElementById('calc-rpm').innerText = rpm;
             document.getElementById('calc-dp').innerText = currentDeltaP.toFixed(2);
             document.getElementById('calc-pin').innerText = pin.toFixed(2);
@@ -393,23 +450,21 @@
             document.getElementById('val-dp').innerText = currentDeltaP.toFixed(2) + " bar";
             document.getElementById('val-total').innerText = currentPOut.toFixed(2) + " bar";
 
-            // 4. تحديث بيئة 3D
             if (mixer) {
-                // منع توقف الأنيميشن تماماً إذا كانت السرعة 0، نجعله بطيئاً جداً
                 mixer.timeScale = Math.max(speedRatio, 0.05); 
             }
             particleSpeedMultiplier = Math.max(speedRatio, 0.05);
         }
 
         // ==========================================
-        // تحميل الموديل ونظام الجزيئات
+        // تحميل الموديل ونظام الجزيئات النقطية
         // ==========================================
         let currentModel, mixer; 
         const clock = new THREE.Clock();
         const loader = new THREE.GLTFLoader();
         
         let particleSystem;
-        const particleCount = 1800; 
+        const particleCount = 2000; 
         const particleData = []; 
         let flowCurve; 
 
@@ -421,10 +476,10 @@
             for (let i = 0; i < particleCount; i++) {
                 particleData.push({
                     progress: Math.random(),
-                    offsetX: (Math.random() - 0.5) * 0.08,
-                    offsetY: (Math.random() - 0.5) * 0.08,
-                    offsetZ: (Math.random() - 0.5) * 0.08,
-                    speed: 0.6 + Math.random() * 0.4 
+                    offsetX: (Math.random() - 0.5) * 0.1,
+                    offsetY: (Math.random() - 0.5) * 0.1,
+                    offsetZ: (Math.random() - 0.5) * 0.1,
+                    speed: 0.6 + Math.random() * 0.6 
                 });
                 colors[i * 3] = 0; colors[i * 3 + 1] = 0.5; colors[i * 3 + 2] = 1;
             }
@@ -433,7 +488,7 @@
             geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
             const material = new THREE.PointsMaterial({
-                size: 0.035, vertexColors: true, transparent: true, opacity: 0.9,
+                size: 0.03, vertexColors: true, transparent: true, opacity: 0.9,
                 blending: THREE.AdditiveBlending 
             });
 
@@ -445,24 +500,29 @@
             if(currentModel) scene.remove(currentModel);
             if(particleSystem) scene.remove(particleSystem);
             if(mixer) { mixer.stopAllAction(); mixer = null; }
-            pumpMaterials = []; // تفريغ المواد المحفوظة
+            pumpMaterials = []; 
+
+            document.getElementById('error-msg').style.display = 'none';
+            document.getElementById('loading-msg').style.display = 'block';
 
             loader.load(filename, function(gltf) {
                 currentModel = gltf.scene;
                 
-                // تحديد غلاف المضخة ووضعه في المصفوفة للتحكم فيه لاحقاً
+                // التلوين الديناميكي لأجزاء المضخة
                 currentModel.traverse((child) => {
-                    if (child.isMesh && child.name !== 'Object_26' && child.name !== 'Object_28') { 
-                        // استبدال المادة الافتراضية بمادة قابلة للتحكم
-                        child.material = new THREE.MeshStandardMaterial({
-                            color: 0x94a3b8, // رمادي افتراضي
-                            metalness: 0.6,
-                            roughness: 0.2,
-                            transparent: true,
-                            opacity: 0.3,
-                            depthWrite: false
-                        });
-                        pumpMaterials.push(child.material);
+                    if (child.isMesh) {
+                        // استثناء المراوح الداخلية (إن وجدت) لتبقى بلونها
+                        if (child.name.toLowerCase().includes('impeller') || child.name.toLowerCase().includes('arrow')) {
+                            // لا تغير لون المروحة
+                        } else {
+                            // تغيير الغلاف الخارجي
+                            child.material = new THREE.MeshStandardMaterial({
+                                color: 0x94a3b8, metalness: 0.7, roughness: 0.2,
+                                transparent: true, opacity: parseFloat(document.getElementById('slider-opacity').value), 
+                                depthWrite: false
+                            });
+                            pumpMaterials.push(child.material);
+                        }
                     }
                 });
                 
@@ -476,13 +536,14 @@
                 currentModel.position.y += (size.y * scale) / 2;
                 scene.add(currentModel);
 
-                // إحداثيات بناء المسار
+                // بناء المسار للجزيئات
                 const fixZ = -0.020; 
                 function transformPoint(pt) {
                     let newPt = pt.clone().multiplyScalar(scale).sub(center.clone().multiplyScalar(scale)); 
                     newPt.y += (size.y * scale) / 2; return newPt;
                 }
 
+                // المسار العام (سيطبق على الموديلين بشكل تقريبي)
                 const sCenter = transformPoint(new THREE.Vector3(-0.002, -0.002, fixZ));
                 const sOutlet = transformPoint(new THREE.Vector3(0.292, 0.757, fixZ));
                 const R = sOutlet.x * 0.85; 
@@ -499,6 +560,8 @@
                 ];
 
                 flowCurve = new THREE.CatmullRomCurve3(curvePoints, false, 'catmullrom', 0.5);
+                
+                // توليد الجزيئات بدلاً من المائع الصلب
                 createParticles(flowCurve);
 
                 if (gltf.animations && gltf.animations.length > 0) {
@@ -506,20 +569,21 @@
                     gltf.animations.forEach((clip) => mixer.clipAction(clip).play());
                 }
                 
-                calculatePhysics(); // التهيئة الأولى للقيم
+                calculatePhysics(); 
                 document.getElementById('loading-msg').style.display = 'none';
 
             }, undefined, function(error) {
+                console.error(error);
                 document.getElementById('loading-msg').style.display = 'none';
                 document.getElementById('error-msg').style.display = 'block';
             });
         }
 
         // ==========================================
-        // حلقة التحريك المستمرة (Animation Loop)
+        // حلقة التحريك (Animation Loop)
         // ==========================================
-        const colorLow = new THREE.Color(0x0ea5e9); // أزرق للدخول
-        const colorHigh = new THREE.Color(0xef4444); // أحمر للطرد
+        const colorLow = new THREE.Color(0x0ea5e9); 
+        const colorHigh = new THREE.Color(0xef4444); 
 
         function animate() {
             requestAnimationFrame(animate);
@@ -553,7 +617,9 @@
             renderer.render(scene, camera);
         }
         
-        loadModel('pump_animated.glb'); 
+        // التهيئة الأولية
+        updateUIContent();
+        loadModel(pumpsDB[activePumpKey].file); 
         animate();
 
         window.addEventListener('resize', () => {
