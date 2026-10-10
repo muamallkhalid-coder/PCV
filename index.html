@@ -42,7 +42,7 @@
 
         .app-grid {
             display: grid;
-            grid-template-columns: 320px 1fr 450px; /* 3 أعمدة: قوائم/شرح، 3D، معادلات وتحكم */
+            grid-template-columns: 320px 1fr 450px;
             height: calc(100vh - 65px);
         }
 
@@ -59,7 +59,7 @@
         .side-panel::-webkit-scrollbar { width: 6px; }
         .side-panel::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
 
-        /* القائمة الجانبية المحدثة (Sub-categories) */
+        /* القائمة الجانبية (Sub-categories) */
         .category-group { margin-bottom: 20px; }
         .category-title { color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: 700; border-bottom: 1px solid #334155; padding-bottom: 5px;}
         .main-item { font-weight: 600; color: var(--text-main); padding: 8px 0; margin-top: 10px;}
@@ -76,7 +76,7 @@
         .viewport-container { position: relative; background: #000; }
         #canvas-container { width: 100%; height: 100%; outline: none; }
         
-        /* أدوات تحكم بيئة 3D (الشفافية والألوان) */
+        /* أدوات تحكم بيئة 3D */
         .env-controls {
             position: absolute; top: 15px; left: 15px;
             background: rgba(15, 20, 35, 0.8); backdrop-filter: blur(8px);
@@ -97,7 +97,7 @@
             border-bottom: 1px solid var(--border-color); padding-bottom: 10px; font-weight: 700;
         }
 
-        /* أدوات التحكم بالقيم (Inputs & Sliders) */
+        /* أدوات التحكم بالقيم */
         .input-group { margin-bottom: 15px; }
         .input-group-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem;}
         .number-input { 
@@ -151,13 +151,12 @@
         
         <!-- العمود الأول: القائمة الجانبية والشرح -->
         <aside class="side-panel">
-            <!-- قائمة المعدات -->
             <div class="category-group">
                 <div class="category-title"><span class="ar-only">تصنيفات المضخات</span><span class="en-only">Pump Categories</span></div>
                 
                 <div class="main-item"><span class="ar-only">▾ مضخات الطرد المركزي</span><span class="en-only">▾ Centrifugal Pumps</span></div>
                 <ul class="sub-item-list">
-                    <!-- تم وضع ./ قبل اسم الملف لكي يعمل على GitHub Pages -->
+                    <!-- اسم الملف المباشر يعمل بشكل ممتاز على الاستضافات و GitHub -->
                     <li class="active" onclick="loadPumpData('centrifugal_single', this)">
                         <span class="ar-only">أحادية المرحلة (Single-Stage)</span><span class="en-only">Single-Stage</span>
                     </li>
@@ -169,7 +168,6 @@
                 <div class="main-item"><span class="ar-only">▸ المضخات الترددية</span><span class="en-only">▸ Reciprocating Pumps</span></div>
             </div>
 
-            <!-- الشرح النظري (يتم تحديثه برمجياً) -->
             <div class="section-box" id="theory-container">
                 <h3 class="section-title" id="theory-title">مبدأ العمل</h3>
                 <p class="theory-text" id="theory-desc"></p>
@@ -192,6 +190,7 @@
                 </div>
                 <div class="color-row">
                     <span class="ar-only">المضخة:</span><span class="en-only">Pump:</span>
+                    <!-- أزرار لتغيير لون غلاف المضخة -->
                     <div class="color-btn" style="background: #94a3b8;" onclick="changePumpColor(0x94a3b8)"></div>
                     <div class="color-btn" style="background: #f59e0b;" onclick="changePumpColor(0xf59e0b)"></div>
                     <div class="color-btn" style="background: #0ea5e9;" onclick="changePumpColor(0x0ea5e9)"></div>
@@ -233,7 +232,7 @@
 
             <div class="section-box">
                 <h3 class="section-title"><span class="ar-only">القوانين والحسابات (Affinity Laws)</span><span class="en-only">Calculations</span></h3>
-                <div style="font-size: 1.1rem; text-align: center; margin: 10px 0;">
+                <div style="font-size: 1.1rem; text-align: center; margin: 10px 0; color: #e2e8f0;">
                     $$\frac{H_2}{H_1} = \left( \frac{N_2}{N_1} \right)^2$$
                 </div>
                 <div class="math-box">
@@ -272,11 +271,11 @@
 
     <script>
         // ==========================================
-        // قاعدة البيانات الهندسية للمضخات (محدثة مع مسارات GitHub الصحيحة)
+        // قاعدة البيانات الهندسية للمضخات
         // ==========================================
         const pumpsDB = {
             'centrifugal_single': {
-                file: './pump_animated.glb', // مسار نسبي ليعمل على GitHub
+                file: 'pump_animated.glb', // مسار آمن
                 designRPM: 2900,
                 designDeltaP: 4.2,
                 title_ar: 'مبدأ العمل (أحادية المرحلة)',
@@ -287,12 +286,12 @@
                 usage_en: '• Fluid transfer in short pipelines.<br>• Cooling and circulation in heat exchangers.<br>• Low to medium pressure pumping.'
             },
             'centrifugal_multi': {
-                file: './multistage_pump_flow_animated.glb', // مسار نسبي ليعمل على GitHub
+                file: 'multistage_pump_flow_animated.glb', // مسار آمن
                 designRPM: 3500, 
                 designDeltaP: 15.5, 
                 title_ar: 'مبدأ العمل (متعددة المراحل)',
                 title_en: 'Working Principle (Multi-Stage)',
-                desc_ar: 'تتكون المضخة متعددة المراحل من عدة مراوح (Impellers) مركبة على نفس عمود الدوران (Shaft) بشكل متتالٍ. يمر المائع من مروحة لأخرى، وفي كل مرحلة يكتسب ضغطاً إضافياً، مما يولد طاقة ضغط (Head) هائلة جداً لا يمكن لمروحة واحدة تحقيقها.',
+                desc_ar: 'تتكون المضخة متعددة المراحل من عدة مراوح (Impellers) مركبة على نفس عمود الدوران بشكل متتالٍ. يمر المائع من مروحة لأخرى، وفي كل مرحلة يكتسب ضغطاً إضافياً، مما يولد طاقة ضغط (Head) هائلة جداً لا يمكن لمروحة واحدة تحقيقها.',
                 desc_en: 'Multi-stage pumps consist of multiple impellers connected in series on the same shaft. Fluid passes from one stage to the next, accumulating immense pressure head impossible for a single stage.',
                 usage_ar: '• <b>حقن المياه (Water Injection):</b> لحقن الماء بضغوط هائلة داخل آبار النفط للحفاظ على ضغط المكمن.<br>• <b>خطوط التصدير (Export Pumps):</b> لضخ النفط الخام لمسافات طويلة.<br>• تغذية المراجل (Boiler Feed Pumps) في محطات الطاقة.',
                 usage_en: '• <b>Water Injection:</b> Injecting water into oil wells at extreme pressures.<br>• <b>Export Pipelines:</b> Pumping crude oil over long distances.<br>• Boiler feed pumps in power generation.'
@@ -338,6 +337,9 @@
             loadModel(pumpsDB[key].file);
         }
 
+        // ==========================================
+        // إعداد بيئة 3D
+        // ==========================================
         const container = document.getElementById('canvas-container');
         const scene = new THREE.Scene();
         scene.background = new THREE.Color('#000000'); 
@@ -371,7 +373,7 @@
 
         function changePumpColor(hexColor) {
             pumpMaterials.forEach(mat => {
-                mat.color.setHex(hexColor);
+                if(mat.color) mat.color.setHex(hexColor);
             });
         }
 
@@ -481,6 +483,9 @@
             scene.add(particleSystem);
         }
 
+        // ==========================================
+        // التعديل الآمن للتحميل والمواد (إصلاح الخطأ)
+        // ==========================================
         function loadModel(filename) {
             if(currentModel) scene.remove(currentModel);
             if(particleSystem) scene.remove(particleSystem);
@@ -493,17 +498,21 @@
             loader.load(filename, function(gltf) {
                 currentModel = gltf.scene;
                 
+                // تعديل الخصائص فقط دون استبدال المادة للحفاظ على الـ Skinning (حركة العظام)
+                const currentOpacity = parseFloat(document.getElementById('slider-opacity').value);
+                
                 currentModel.traverse((child) => {
                     if (child.isMesh) {
-                        if (child.name.toLowerCase().includes('impeller') || child.name.toLowerCase().includes('arrow')) {
-                            // لا تغير لون المروحة
-                        } else {
-                            child.material = new THREE.MeshStandardMaterial({
-                                color: 0x94a3b8, metalness: 0.7, roughness: 0.2,
-                                transparent: true, opacity: parseFloat(document.getElementById('slider-opacity').value), 
-                                depthWrite: false
-                            });
-                            pumpMaterials.push(child.material);
+                        const name = child.name.toLowerCase();
+                        // نتخطى المروحة والأسهم
+                        if (!name.includes('impeller') && !name.includes('arrow') && !name.includes('rotor') && !name.includes('shaft')) {
+                            // التعديل مباشرة على المادة الأصلية
+                            if(child.material) {
+                                child.material.transparent = true;
+                                child.material.opacity = currentOpacity;
+                                child.material.depthWrite = false;
+                                pumpMaterials.push(child.material);
+                            }
                         }
                     }
                 });
@@ -524,9 +533,18 @@
                     newPt.y += (size.y * scale) / 2; return newPt;
                 }
 
+                // نقاط مسار آمنة تمنع الخطأ في حال اختلف الموديل
                 const sCenter = transformPoint(new THREE.Vector3(-0.002, -0.002, fixZ));
-                const sOutlet = transformPoint(new THREE.Vector3(0.292, 0.757, fixZ));
-                const R = sOutlet.x * 0.85; 
+                let rawOutlet = new THREE.Vector3(0.292, 0.757, fixZ);
+                
+                // في حال كانت المضخة متعددة المراحل مختلفة المركز، نؤمن المسار
+                if(activePumpKey === 'centrifugal_multi') {
+                    rawOutlet = new THREE.Vector3(0.2, 0.8, fixZ); 
+                }
+                const sOutlet = transformPoint(rawOutlet);
+                
+                let R = Math.abs(sOutlet.x - sCenter.x) * 0.85; 
+                if (R < 0.1) R = 0.5; // منع توقف النظام إذا كانت الحسابات صفرية
 
                 const curvePoints = [
                     sCenter.clone().add(new THREE.Vector3(0, 0, -1.5)), 
