@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centrifugal Pump Simulator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-panel: #1e1e24;
+            --border-color: #333333;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --primary: #00a8ff;
+            --danger: #e84118;
+            --success: #4cd137;
+        }
+
+        body { 
+            margin: 0; padding: 0; 
+            font-family: 'Tajawal', sans-serif; 
+            background: var(--bg-dark);
+            color: var(--text-main); 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden;
+        }
+
+        /* شريط التنقل العلوي */
+        header { 
+            height: 60px;
+            background: #18181c;
+            border-bottom: 1px solid var(--border-color);
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        
+        h1 { margin: 0; font-size: 1.3rem; font-weight: 700; color: #fff; }
+        
+        .lang-btn { 
+            background: transparent; color: var(--primary); 
+            border: 1px solid var(--primary); padding: 5px 15px; 
+            border-radius: 4px; cursor: pointer; font-family: 'Tajawal', sans-serif;
+        }
+
+        /* تقسيم الشاشة الرئيسي */
+        .app-container {
+            display: flex;
+            flex: 1;
+            height: calc(100vh - 60px);
+        }
+
+        /* لوحة البيانات والتحكم المعزولة */
+        .data-panel {
+            width: 400px;
+            background: var(--bg-panel);
+            border-left: 1px solid var(--border-color);
+            padding: 20px;
+            overflow-y: auto;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* مساحة العرض 3D المعزولة */
+        .canvas-container {
+            flex: 1;
+            position: relative;
+            background: #0a0a0c;
+        }
+
+        /* تنسيق الصناديق داخل لوحة البيانات */
+        .section-box {
+            background: #25252b;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .section-title {
+            margin: 0 0 15px 0;
+            font-size: 1rem;
+            color: var(--primary);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        /* القراءات */
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .data-label { color: var(--text-muted); font-size: 0.9rem; }
+        .data-value { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: bold; direction: ltr;}
+        
+        /* أدوات التحكم */
+        .control-group { margin-bottom: 15px; }
+        .control-group label { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 8px; }
+        input[type="range"] { width: 100%; cursor: pointer; accent-color: var(--primary); }
+
+        /* النصوص والمعادلات */
+        .desc-text { font-size: 0.85rem; line-height: 1.6; color: #bbbbbb; margin: 0; }
+        .math-block { background: #121212; padding: 10px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; margin-top: 10px; direction: ltr; text-align: left;}
+
+        [lang="ar"] .en-only { display: none; }
+        [lang="en"] .ar-only { display: none; }
+        
+        #loading-msg, #error-msg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 15px; background: #222; border: 1px solid #444; border-radius: 4px; font-family: 'Tajawal', sans-serif;}
+        #error-msg { display: none; color: var(--danger); border-color: var(--danger);}
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>
+            <span class="ar-only">محاكي المعدات - قسم المضخات</span>
+            <span class="en-only">Equipment Simulator - Pumps</span>
+        </h1>
+        <button class="lang-btn" onclick="toggleLanguage()">English</button>
+    </header>
+
+    <div class="app-container">
+        <!-- لوحة البيانات المعزولة بالكامل -->
+        <aside class="data-panel">
+            
+            <div class="section-box">
+                <h3 class="section-title"><span class="ar-only">القراءات الحية</span><span class="en-only">Live Readings</span></h3>
+                <div class="data-row">
+                    <span class="data-label"><span class="ar-only">سائل الدخول</span><span class="en-only">Fluid</span></span>
+                    <span class="data-value">Water</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label"><span class="ar-only">سرعة المروحة</span><span class="en-only">Speed (N)</span></span>
+                    <span class="data-value" style="color: var(--success);" id="val-rpm">2900 RPM</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label"><span class="ar-only">ضغط السحب</span><span class="en-only">Suction (P1)</span></span>
+                    <span class="data-value" style="color: var(--primary);" id="val-pin">1.0 bar</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label"><span class="ar-only">ضغط الطرد</span><span class="en-only">Discharge (P2)</span></span>
+                    <span class="data-value" style="color: var(--danger);" id="val-pout">5.2 bar</span>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <h3 class="section-title"><span class="ar-only">التحكم بالمحرك</span><span class="en-only">Motor Control</span></h3>
+                <div class="control-group">
+                    <label>
+                        <span><span class="ar-only">السرعة (RPM)</span><span class="en-only">Speed (RPM)</span></span>
+                        <span id="label-rpm" style="font-family: monospace;">2900</span>
+                    </label>
+                    <input type="range" id="slider-rpm" min="1000" max="3600" value="2900" step="50" oninput="updatePhysics()">
+                </div>
+                <div class="control-group">
+                    <label>
+                        <span><span class="ar-only">ضغط الدخول الأساسي</span><span class="en-only">Base Inlet Press.</span></span>
+                        <span id="label-pin" style="font-family: monospace;">1.0</span>
+                    </label>
+                    <input type="range" id="slider-pin" min="0.5" max="5.0" value="1.0" step="0.1" oninput="updatePhysics()">
+                </div>
+            </div>
+
+            <div class="section-box">
+                <h3 class="section-title"><span class="ar-only">التوصيف الرياضي (Affinity Laws)</span><span class="en-only">Mathematical Model</span></h3>
+                <p class="desc-text">
+                    <span class="ar-only">تتغير طاقة الضغط المكتسبة (Head) بشكل طردي مع مربع سرعة الدوران. الجزيئات تتسارع استجابة لتغير التدفق.</span>
+                    <span class="en-only">The generated pressure head varies directly with the square of the impeller speed. Particles accelerate accordingly.</span>
+                </p>
+                <div class="math-block">
+                    <div>ΔP₂ = ΔP₁ × (N₂ / N₁)²</div>
+                    <div style="margin-top: 8px; color: var(--text-muted);" id="math-calc">ΔP₂ = 4.2 × (2900/2900)²</div>
+                    <div style="margin-top: 8px; color: var(--success);" id="math-head">Generated Head (ΔP): 4.20 bar</div>
+                    <div style="margin-top: 8px; border-top: 1px solid #333; padding-top: 8px; color: var(--danger);" id="math-total">P_out = P_in + ΔP = 5.20 bar</div>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- مساحة العرض المعزولة بالكامل -->
+        <main class="canvas-container" id="canvas-container">
+            <div id="loading-msg"><span class="ar-only">جاري تهيئة البيئة...</span><span class="en-only">Initializing Environment...</span></div>
+            <div id="error-msg"><span class="ar-only">حدث خطأ في قراءة ملف الموديل</span><span class="en-only">Error reading model file</span></div>
+        </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+    <script>
+        // نظام اللغات
+        let currentLang = 'ar';
+        function toggleLanguage() {
+            const htmlTag = document.getElementById('html-root');
+            const btn = document.querySelector('.lang-btn');
+            if (currentLang === 'ar') {
+                currentLang = 'en'; htmlTag.setAttribute('lang', 'en'); htmlTag.setAttribute('dir', 'ltr'); btn.textContent = 'العربية';
+            } else {
+                currentLang = 'ar'; htmlTag.setAttribute('lang', 'ar'); htmlTag.setAttribute('dir', 'rtl'); btn.textContent = 'English';
+            }
+        }
+
+        // ==========================================
+        // 1. إعداد بيئة 3D
+        // ==========================================
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color('#0a0a0c'); // خلفية داكنة صافية
+
+        const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
+        camera.position.set(-2, 1.5, 3); 
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        container.appendChild(renderer.domElement);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1.0); scene.add(ambientLight);
+        const dirLight = new THREE.DirectionalLight(0xffffff, 1.5); dirLight.position.set(5, 10, 5); scene.add(dirLight);
+
+        // ==========================================
+        // 2. الحسابات الفيزيائية
+        // ==========================================
+        let particleSpeedMultiplier = 1.0; 
+
+        function updatePhysics() {
+            const currentRPM = parseFloat(document.getElementById('slider-rpm').value);
+            const currentPIn = parseFloat(document.getElementById('slider-pin').value);
+            
+            const designRPM = 2900;
+            const designDeltaP = 4.2; 
+            
+            const speedRatio = currentRPM / designRPM;
+            const currentDeltaP = designDeltaP * Math.pow(speedRatio, 2);
+            const currentPOut = currentPIn + currentDeltaP;
+
+            document.getElementById('label-rpm').innerText = currentRPM;
+            document.getElementById('label-pin').innerText = currentPIn.toFixed(1);
+
+            document.getElementById('val-rpm').innerText = currentRPM + " RPM";
+            document.getElementById('val-pin').innerText = currentPIn.toFixed(1) + " bar";
+            document.getElementById('val-pout').innerText = currentPOut.toFixed(2) + " bar";
+
+            document.getElementById('math-calc').innerText = `ΔP₂ = 4.2 × (${currentRPM}/2900)²`;
+            document.getElementById('math-head').innerText = `Generated Head (ΔP): ${currentDeltaP.toFixed(2)} bar`;
+            document.getElementById('math-total').innerText = `P_out = P_in + ΔP = ${currentPOut.toFixed(2)} bar`;
+
+            if (mixer) mixer.timeScale = speedRatio; 
+            particleSpeedMultiplier = speedRatio; 
+        }
+
+        // ==========================================
+        // 3. نظام الجزيئات (Particles System) بدلاً من المائع الصلب
+        // ==========================================
+        let currentModel, mixer; 
+        const clock = new THREE.Clock();
+        const loader = new THREE.GLTFLoader();
+        
+        let particleSystem;
+        const particleCount = 1500; // عدد الجزيئات
+        const particleData = []; // لحفظ مسار كل جزيء
+        let flowCurve; // المنحنى الذي ستمشي عليه الجزيئات
+
+        function createParticles(curve) {
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+
+            for (let i = 0; i < particleCount; i++) {
+                // نعطي كل جزيء نقطة انطلاق عشوائية على المسار، وإزاحة عشوائية بسيطة لكي لا يكونوا على خط واحد
+                particleData.push({
+                    progress: Math.random(),
+                    offsetX: (Math.random() - 0.5) * 0.08,
+                    offsetY: (Math.random() - 0.5) * 0.08,
+                    offsetZ: (Math.random() - 0.5) * 0.08,
+                    speed: 0.5 + Math.random() * 0.5 // سرعات عشوائية طفيفة لكل جزيء
+                });
+
+                // الألوان المبدئية
+                colors[i * 3] = 0;
+                colors[i * 3 + 1] = 0.5;
+                colors[i * 3 + 2] = 1;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            // مادة الجزيئات (نقاط صغيرة ملونة)
+            const material = new THREE.PointsMaterial({
+                size: 0.03,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending // يعطي تأثير التوهج عند التجمع
+            });
+
+            particleSystem = new THREE.Points(geometry, material);
+            scene.add(particleSystem);
+        }
+
+        function loadModel(filename) {
+            if(currentModel) scene.remove(currentModel);
+            if(particleSystem) scene.remove(particleSystem);
+            if(mixer) { mixer.stopAllAction(); mixer = null; }
+
+            document.getElementById('error-msg').style.display = 'none';
+            document.getElementById('loading-msg').style.display = 'block';
+
+            loader.load(filename, function(gltf) {
+                currentModel = gltf.scene;
+                
+                // جعل غلاف المضخة شفافاً لرؤية الجزيئات بالداخل
+                currentModel.traverse((child) => {
+                    if (child.isMesh && child.name !== 'Object_26' && child.name !== 'Object_28') { 
+                        child.material.transparent = true; 
+                        child.material.opacity = 0.3; 
+                        child.material.depthWrite = false; 
+                    }
+                });
+                
+                const box = new THREE.Box3().setFromObject(currentModel);
+                const center = box.getCenter(new THREE.Vector3());
+                const size = box.getSize(new THREE.Vector3());
+                const scale = 2 / Math.max(size.x, size.y, size.z); 
+                
+                currentModel.scale.set(scale, scale, scale);
+                currentModel.position.sub(center.multiplyScalar(scale));
+                currentModel.position.y += (size.y * scale) / 2;
+                scene.add(currentModel);
+
+                // بناء مسار الجريان استناداً للإحداثيات الدقيقة الموحدة على محور Z
+                const fixZ = -0.020; 
+                const rawCenter = new THREE.Vector3(-0.002, -0.002, fixZ);
+                const rawOutlet = new THREE.Vector3(0.292, 0.757, fixZ);
+
+                function transformPoint(pt) {
+                    let newPt = pt.clone().multiplyScalar(scale).sub(center.clone().multiplyScalar(scale)); 
+                    newPt.y += (size.y * scale) / 2; return newPt;
+                }
+
+                const sCenter = transformPoint(rawCenter);
+                const sOutlet = transformPoint(rawOutlet);
+                const R = sOutlet.x * 0.85; 
+
+                const curvePoints = [
+                    sCenter.clone().add(new THREE.Vector3(0, 0, -1.5)), // الدخول من الخلف
+                    sCenter, // المركز
+                    new THREE.Vector3(sCenter.x - R*0.6, sCenter.y, sCenter.z), 
+                    new THREE.Vector3(sCenter.x, sCenter.y - R*0.9, sCenter.z), 
+                    new THREE.Vector3(sCenter.x + R*1.1, sCenter.y, sCenter.z), 
+                    new THREE.Vector3(sCenter.x + R*1.1, sCenter.y + R*0.8, sCenter.z), 
+                    sOutlet, // الخروج
+                    sOutlet.clone().add(new THREE.Vector3(0, 1.5, 0)) // الصعود
+                ];
+
+                flowCurve = new THREE.CatmullRomCurve3(curvePoints, false, 'catmullrom', 0.5);
+                
+                // إنشاء الجزيئات بدلاً من الأنبوب
+                createParticles(flowCurve);
+
+                if (gltf.animations && gltf.animations.length > 0) {
+                    mixer = new THREE.AnimationMixer(currentModel);
+                    gltf.animations.forEach((clip) => mixer.clipAction(clip).play());
+                }
+                
+                updatePhysics(); 
+                document.getElementById('loading-msg').style.display = 'none';
+
+            }, undefined, function(error) {
+                console.error(error);
+                document.getElementById('loading-msg').style.display = 'none';
+                document.getElementById('error-msg').style.display = 'block';
+            });
+        }
+
+        // ==========================================
+        // 4. حلقة التحريك وتحديث الجزيئات
+        // ==========================================
+        const colorLow = new THREE.Color(0x00d2ff); // أزرق للدخول
+        const colorHigh = new THREE.Color(0xff0055); // أحمر للخروج
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+
+            const delta = clock.getDelta();
+            if (mixer) mixer.update(delta);
+
+            // تحديث حركة الجزيئات (Particles)
+            if (particleSystem && flowCurve) {
+                const positions = particleSystem.geometry.attributes.position.array;
+                const colors = particleSystem.geometry.attributes.color.array;
+
+                for (let i = 0; i < particleCount; i++) {
+                    const data = particleData[i];
+                    
+                    // تحريك الجزيء للأمام بناءً على السرعة
+                    data.progress += delta * data.speed * particleSpeedMultiplier;
+                    
+                    // إذا وصل للنهاية، يرجع للبداية
+                    if (data.progress > 1) {
+                        data.progress = 0;
+                    }
+
+                    // الحصول على النقطة الحالية على المسار
+                    const pointOnCurve = flowCurve.getPointAt(data.progress);
+
+                    // إضافة الإزاحة العشوائية لكي تنتشر الجزيئات في مساحة الأنبوب ولا تكون خطاً واحداً
+                    positions[i * 3] = pointOnCurve.x + data.offsetX;
+                    positions[i * 3 + 1] = pointOnCurve.y + data.offsetY;
+                    positions[i * 3 + 2] = pointOnCurve.z + data.offsetZ;
+
+                    // تحديث اللون بناءً على تقدم الجزيء (أزرق -> أحمر)
+                    const mixedColor = new THREE.Color().lerpColors(colorLow, colorHigh, data.progress);
+                    colors[i * 3] = mixedColor.r;
+                    colors[i * 3 + 1] = mixedColor.g;
+                    colors[i * 3 + 2] = mixedColor.b;
+                }
+
+                particleSystem.geometry.attributes.position.needsUpdate = true;
+                particleSystem.geometry.attributes.color.needsUpdate = true;
+            }
+
+            renderer.render(scene, camera);
+        }
+        
+        loadModel('pump_animated.glb'); 
+        animate();
+
+        // تحديث أبعاد الكانفاس عند تغيير حجم النافذة
+        window.addEventListener('resize', () => {
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        });
+    </script>
+</body>
+</html>
