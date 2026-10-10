@@ -42,11 +42,10 @@
 
         .app-grid {
             display: grid;
-            grid-template-columns: 320px 1fr 450px;
+            grid-template-columns: 320px 1fr 450px; 
             height: calc(100vh - 65px);
         }
 
-        /* اللوحات الجانبية */
         .side-panel {
             background: var(--panel-bg);
             border-left: 1px solid var(--border-color);
@@ -59,7 +58,6 @@
         .side-panel::-webkit-scrollbar { width: 6px; }
         .side-panel::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
 
-        /* القائمة الجانبية (Sub-categories) */
         .category-group { margin-bottom: 20px; }
         .category-title { color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: 700; border-bottom: 1px solid #334155; padding-bottom: 5px;}
         .main-item { font-weight: 600; color: var(--text-main); padding: 8px 0; margin-top: 10px;}
@@ -72,11 +70,9 @@
         .sub-item-list li.active { background: rgba(14, 165, 233, 0.15); color: var(--accent-blue); font-weight: bold; border-right: 3px solid var(--accent-blue);}
         [dir="ltr"] .sub-item-list li.active { border-right: none; border-left: 3px solid var(--accent-blue); }
 
-        /* منطقة 3D */
         .viewport-container { position: relative; background: #000; }
         #canvas-container { width: 100%; height: 100%; outline: none; }
         
-        /* أدوات تحكم بيئة 3D */
         .env-controls {
             position: absolute; top: 15px; left: 15px;
             background: rgba(15, 20, 35, 0.8); backdrop-filter: blur(8px);
@@ -87,7 +83,6 @@
         .color-btn { width: 20px; height: 20px; border-radius: 50%; border: 1px solid #fff; cursor: pointer; }
         .opacity-slider { width: 120px; accent-color: var(--accent-blue); }
 
-        /* الأقسام والصناديق */
         .section-box {
             background: #1e2433; border: 1px solid var(--border-color);
             border-radius: 8px; padding: 20px; margin-bottom: 20px;
@@ -97,7 +92,6 @@
             border-bottom: 1px solid var(--border-color); padding-bottom: 10px; font-weight: 700;
         }
 
-        /* أدوات التحكم بالقيم */
         .input-group { margin-bottom: 15px; }
         .input-group-header { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem;}
         .number-input { 
@@ -107,7 +101,6 @@
         }
         input[type="range"] { width: 100%; cursor: pointer; accent-color: var(--accent-blue); }
 
-        /* التحذيرات الهندسية */
         .warning-box {
             background: rgba(239, 68, 68, 0.1); border-right: 4px solid var(--accent-red);
             padding: 10px 15px; border-radius: 4px; font-size: 0.85rem; color: var(--accent-red);
@@ -115,12 +108,10 @@
         }
         [dir="ltr"] .warning-box { border-right: none; border-left: 4px solid var(--accent-red); }
 
-        /* القراءات (Readings) */
         .data-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px dashed #334155; padding-bottom: 8px;}
         .data-label { color: var(--text-muted); font-size: 0.95rem; }
         .data-value { font-family: 'Fira Code', monospace; font-size: 1.15rem; font-weight: bold; direction: ltr;}
 
-        /* الشرح الهندسي والمعادلات */
         .theory-text { font-size: 0.95rem; line-height: 1.8; color: #cbd5e1; text-align: justify; margin-bottom: 15px;}
         .math-box {
             background: #0b0f19; border: 1px solid #334155; border-radius: 6px;
@@ -149,14 +140,12 @@
 
     <div class="app-grid">
         
-        <!-- العمود الأول: القائمة الجانبية والشرح -->
         <aside class="side-panel">
             <div class="category-group">
                 <div class="category-title"><span class="ar-only">تصنيفات المضخات</span><span class="en-only">Pump Categories</span></div>
                 
                 <div class="main-item"><span class="ar-only">▾ مضخات الطرد المركزي</span><span class="en-only">▾ Centrifugal Pumps</span></div>
                 <ul class="sub-item-list">
-                    <!-- اسم الملف المباشر يعمل بشكل ممتاز على الاستضافات و GitHub -->
                     <li class="active" onclick="loadPumpData('centrifugal_single', this)">
                         <span class="ar-only">أحادية المرحلة (Single-Stage)</span><span class="en-only">Single-Stage</span>
                     </li>
@@ -179,7 +168,6 @@
             </div>
         </aside>
 
-        <!-- العمود الثاني: العرض ثلاثي الأبعاد -->
         <main class="viewport-container">
             <div class="env-controls">
                 <div class="color-row">
@@ -190,7 +178,6 @@
                 </div>
                 <div class="color-row">
                     <span class="ar-only">المضخة:</span><span class="en-only">Pump:</span>
-                    <!-- أزرار لتغيير لون غلاف المضخة -->
                     <div class="color-btn" style="background: #94a3b8;" onclick="changePumpColor(0x94a3b8)"></div>
                     <div class="color-btn" style="background: #f59e0b;" onclick="changePumpColor(0xf59e0b)"></div>
                     <div class="color-btn" style="background: #0ea5e9;" onclick="changePumpColor(0x0ea5e9)"></div>
@@ -206,7 +193,6 @@
             <div id="canvas-container"></div>
         </main>
 
-        <!-- العمود الثالث: التحكم والقراءات -->
         <aside class="side-panel">
             <div class="section-box">
                 <h3 class="section-title"><span class="ar-only">التحكم التشغيلي (Inputs)</span><span class="en-only">Operational Controls</span></h3>
@@ -271,11 +257,11 @@
 
     <script>
         // ==========================================
-        // قاعدة البيانات الهندسية للمضخات
+        // قاعدة البيانات الهندسية للمضخات (تصحيح المسارات لـ GitHub Pages)
         // ==========================================
         const pumpsDB = {
             'centrifugal_single': {
-                file: 'pump_animated.glb', // مسار آمن
+                file: 'pump_animated.glb', 
                 designRPM: 2900,
                 designDeltaP: 4.2,
                 title_ar: 'مبدأ العمل (أحادية المرحلة)',
@@ -286,7 +272,7 @@
                 usage_en: '• Fluid transfer in short pipelines.<br>• Cooling and circulation in heat exchangers.<br>• Low to medium pressure pumping.'
             },
             'centrifugal_multi': {
-                file: 'multistage_pump_flow_animated.glb', // مسار آمن
+                file: 'multistage_pump_flow_animated.glb', 
                 designRPM: 3500, 
                 designDeltaP: 15.5, 
                 title_ar: 'مبدأ العمل (متعددة المراحل)',
@@ -373,16 +359,19 @@
 
         function changePumpColor(hexColor) {
             pumpMaterials.forEach(mat => {
-                if(mat.color) mat.color.setHex(hexColor);
+                if(mat && mat.color) mat.color.setHex(hexColor);
             });
         }
 
         function changePumpOpacity() {
             const val = parseFloat(document.getElementById('slider-opacity').value);
             pumpMaterials.forEach(mat => {
-                mat.opacity = val;
-                mat.transparent = val < 1.0; 
-                mat.depthWrite = val === 1.0;
+                if(mat) {
+                    mat.opacity = val;
+                    mat.transparent = val < 1.0; 
+                    mat.depthWrite = val === 1.0;
+                    mat.needsUpdate = true;
+                }
             });
         }
 
@@ -456,6 +445,7 @@
         let flowCurve; 
 
         function createParticles(curve) {
+            particleData.length = 0; // مسح البيانات القديمة عند تبديل المضخات
             const geometry = new THREE.BufferGeometry();
             const positions = new Float32Array(particleCount * 3);
             const colors = new Float32Array(particleCount * 3);
@@ -475,7 +465,7 @@
             geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
             const material = new THREE.PointsMaterial({
-                size: 0.03, vertexColors: true, transparent: true, opacity: 0.9,
+                size: 0.035, vertexColors: true, transparent: true, opacity: 0.9,
                 blending: THREE.AdditiveBlending 
             });
 
@@ -484,7 +474,7 @@
         }
 
         // ==========================================
-        // التعديل الآمن للتحميل والمواد (إصلاح الخطأ)
+        // تحميل الموديل المحمي (تجنب أخطاء المتصفح)
         // ==========================================
         function loadModel(filename) {
             if(currentModel) scene.remove(currentModel);
@@ -494,80 +484,96 @@
 
             document.getElementById('error-msg').style.display = 'none';
             document.getElementById('loading-msg').style.display = 'block';
+            document.getElementById('loading-msg').innerText = "جاري تحميل بيئة المحاكاة...";
+            document.getElementById('loading-msg').style.backgroundColor = "#1e2433";
 
             loader.load(filename, function(gltf) {
-                currentModel = gltf.scene;
-                
-                // تعديل الخصائص فقط دون استبدال المادة للحفاظ على الـ Skinning (حركة العظام)
-                const currentOpacity = parseFloat(document.getElementById('slider-opacity').value);
-                
-                currentModel.traverse((child) => {
-                    if (child.isMesh) {
-                        const name = child.name.toLowerCase();
-                        // نتخطى المروحة والأسهم
-                        if (!name.includes('impeller') && !name.includes('arrow') && !name.includes('rotor') && !name.includes('shaft')) {
-                            // التعديل مباشرة على المادة الأصلية
-                            if(child.material) {
-                                child.material.transparent = true;
-                                child.material.opacity = currentOpacity;
-                                child.material.depthWrite = false;
-                                pumpMaterials.push(child.material);
+                try {
+                    currentModel = gltf.scene;
+                    
+                    const currentOpacity = parseFloat(document.getElementById('slider-opacity').value) || 0.3;
+                    
+                    currentModel.traverse((child) => {
+                        if (child.isMesh) {
+                            const name = (child.name || "").toLowerCase();
+                            // تعديل شفافية ولون الغلاف دون كسر هيكل المادة الأصلي (Skinning Protection)
+                            if (!name.includes('impeller') && !name.includes('arrow') && !name.includes('rotor') && !name.includes('shaft')) {
+                                if(child.material) {
+                                    // التحقق مما إذا كانت المادة مصفوفة (Array of Materials) لتجنب الأعطال
+                                    let mats = Array.isArray(child.material) ? child.material : [child.material];
+                                    mats.forEach(mat => {
+                                        mat.transparent = true;
+                                        mat.opacity = currentOpacity;
+                                        mat.depthWrite = false;
+                                        mat.needsUpdate = true;
+                                        pumpMaterials.push(mat);
+                                    });
+                                }
                             }
                         }
+                    });
+                    
+                    const box = new THREE.Box3().setFromObject(currentModel);
+                    const center = box.getCenter(new THREE.Vector3());
+                    const size = box.getSize(new THREE.Vector3());
+                    
+                    // حماية حساب الحجم من القسمة على الصفر
+                    let maxDim = Math.max(size.x, size.y, size.z);
+                    if (maxDim === 0 || isNaN(maxDim)) maxDim = 1;
+                    
+                    const scale = 2 / maxDim; 
+                    
+                    currentModel.scale.set(scale, scale, scale);
+                    currentModel.position.sub(center.clone().multiplyScalar(scale));
+                    currentModel.position.y += (size.y * scale) / 2;
+                    scene.add(currentModel);
+
+                    const fixZ = -0.020; 
+                    function transformPoint(pt) {
+                        let newPt = pt.clone().multiplyScalar(scale).sub(center.clone().multiplyScalar(scale)); 
+                        newPt.y += (size.y * scale) / 2; return newPt;
                     }
-                });
-                
-                const box = new THREE.Box3().setFromObject(currentModel);
-                const center = box.getCenter(new THREE.Vector3());
-                const size = box.getSize(new THREE.Vector3());
-                const scale = 2 / Math.max(size.x, size.y, size.z); 
-                
-                currentModel.scale.set(scale, scale, scale);
-                currentModel.position.sub(center.multiplyScalar(scale));
-                currentModel.position.y += (size.y * scale) / 2;
-                scene.add(currentModel);
 
-                const fixZ = -0.020; 
-                function transformPoint(pt) {
-                    let newPt = pt.clone().multiplyScalar(scale).sub(center.clone().multiplyScalar(scale)); 
-                    newPt.y += (size.y * scale) / 2; return newPt;
+                    const sCenter = transformPoint(new THREE.Vector3(-0.002, -0.002, fixZ));
+                    
+                    // حماية وتعديل مسار الخروج حسب نوع المضخة المختار
+                    let rawOutlet = new THREE.Vector3(0.292, 0.757, fixZ);
+                    if(activePumpKey === 'centrifugal_multi') {
+                        rawOutlet = new THREE.Vector3(0.2, 0.8, fixZ); // إحداثيات تقريبية للمضخة المتعددة
+                    }
+                    const sOutlet = transformPoint(rawOutlet);
+                    
+                    let R = Math.abs(sOutlet.x - sCenter.x) * 0.85; 
+                    if (R < 0.1 || isNaN(R)) R = 0.5; // حماية المسار
+
+                    const curvePoints = [
+                        sCenter.clone().add(new THREE.Vector3(0, 0, -1.5)), 
+                        sCenter.clone().add(new THREE.Vector3(0, 0, -0.01)), 
+                        new THREE.Vector3(sCenter.x - R*0.6, sCenter.y, sCenter.z), 
+                        new THREE.Vector3(sCenter.x, sCenter.y - R*0.9, sCenter.z), 
+                        new THREE.Vector3(sCenter.x + R*1.1, sCenter.y, sCenter.z), 
+                        new THREE.Vector3(sCenter.x + R*1.1, sCenter.y + R*0.8, sCenter.z), 
+                        sOutlet.clone().add(new THREE.Vector3(0, -0.01, 0)), 
+                        sOutlet.clone().add(new THREE.Vector3(0, 1.5, 0)) 
+                    ];
+
+                    flowCurve = new THREE.CatmullRomCurve3(curvePoints, false, 'catmullrom', 0.5);
+                    
+                    createParticles(flowCurve);
+
+                    if (gltf.animations && gltf.animations.length > 0) {
+                        mixer = new THREE.AnimationMixer(currentModel);
+                        gltf.animations.forEach((clip) => mixer.clipAction(clip).play());
+                    }
+                    
+                    calculatePhysics(); 
+                    document.getElementById('loading-msg').style.display = 'none';
+
+                } catch(e) {
+                    console.error("Simulation Logic Error: ", e);
+                    document.getElementById('loading-msg').innerText = "خطأ برمجي: " + e.message;
+                    document.getElementById('loading-msg').style.backgroundColor = "rgba(239, 68, 68, 0.9)";
                 }
-
-                // نقاط مسار آمنة تمنع الخطأ في حال اختلف الموديل
-                const sCenter = transformPoint(new THREE.Vector3(-0.002, -0.002, fixZ));
-                let rawOutlet = new THREE.Vector3(0.292, 0.757, fixZ);
-                
-                // في حال كانت المضخة متعددة المراحل مختلفة المركز، نؤمن المسار
-                if(activePumpKey === 'centrifugal_multi') {
-                    rawOutlet = new THREE.Vector3(0.2, 0.8, fixZ); 
-                }
-                const sOutlet = transformPoint(rawOutlet);
-                
-                let R = Math.abs(sOutlet.x - sCenter.x) * 0.85; 
-                if (R < 0.1) R = 0.5; // منع توقف النظام إذا كانت الحسابات صفرية
-
-                const curvePoints = [
-                    sCenter.clone().add(new THREE.Vector3(0, 0, -1.5)), 
-                    sCenter, 
-                    new THREE.Vector3(sCenter.x - R*0.6, sCenter.y, sCenter.z), 
-                    new THREE.Vector3(sCenter.x, sCenter.y - R*0.9, sCenter.z), 
-                    new THREE.Vector3(sCenter.x + R*1.1, sCenter.y, sCenter.z), 
-                    new THREE.Vector3(sCenter.x + R*1.1, sCenter.y + R*0.8, sCenter.z), 
-                    sOutlet, 
-                    sOutlet.clone().add(new THREE.Vector3(0, 1.5, 0)) 
-                ];
-
-                flowCurve = new THREE.CatmullRomCurve3(curvePoints, false, 'catmullrom', 0.5);
-                
-                createParticles(flowCurve);
-
-                if (gltf.animations && gltf.animations.length > 0) {
-                    mixer = new THREE.AnimationMixer(currentModel);
-                    gltf.animations.forEach((clip) => mixer.clipAction(clip).play());
-                }
-                
-                calculatePhysics(); 
-                document.getElementById('loading-msg').style.display = 'none';
 
             }, undefined, function(error) {
                 console.error(error);
@@ -586,7 +592,7 @@
             const delta = clock.getDelta();
             if (mixer) mixer.update(delta);
 
-            if (particleSystem && flowCurve) {
+            if (particleSystem && flowCurve && particleData.length === particleCount) {
                 const positions = particleSystem.geometry.attributes.position.array;
                 const colors = particleSystem.geometry.attributes.color.array;
 
