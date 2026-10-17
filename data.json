@@ -1,0 +1,1020 @@
+{
+  "_readme": [
+    "Engineering Design database. The website reads only the 'items' list; every key starting with _ is a note and is ignored.",
+    "One entry = one collapsible block in the Engineering Design tab of the device whose id is in 'deviceId'.",
+    "To add a model: upload the .glb to GitHub, then add one entry to 'items' (copy _entry_template).",
+    "Entries are shown in the order they appear here. Put new entries right after the last entry of the same device.",
+    "'deviceName' is only a human label for you; the website ignores it. Set \"hidden\": true on an entry to hide it without deleting it."
+  ],
+  "_valid_sections": [
+    "fluid-dynamics",
+    "exploded-view"
+  ],
+  "_valid_deviceIds": [
+    "cent_single",
+    "cent_multi",
+    "sump",
+    "axial",
+    "gear",
+    "screw",
+    "piston",
+    "diaphragm",
+    "recip",
+    "rscrew",
+    "scroll",
+    "ccomp",
+    "acomp",
+    "gate",
+    "ball",
+    "globe",
+    "needle",
+    "swing",
+    "lift",
+    "safety",
+    "relief",
+    "choke",
+    "esd"
+  ],
+  "_entry_template": {
+    "deviceId": "cent_single",
+    "deviceName": "Single-Stage Centrifugal Pump",
+    "section": "fluid-dynamics",
+    "title": {
+      "en": "Third: Your title in English",
+      "ar": "ثالثاً: عنوانك بالعربية"
+    },
+    "description": {
+      "en": "One or two sentences.",
+      "ar": "جملة أو جملتان."
+    },
+    "model": "your_file_name.glb"
+  },
+  "items": [
+    {
+      "deviceId": "cent_single",
+      "deviceName": "Single-Stage Centrifugal Pump",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Fluid motion with pressure gradients inside the pump",
+        "ar": "أولاً: حركة المائع وتدرجات الضغط داخل المضخة"
+      },
+      "description": {
+        "en": "Follow the liquid through the pump and see how pressure builds from inlet to outlet.",
+        "ar": "تتبّع السائل عبر المضخة وشاهد كيف يتزايد الضغط من المدخل إلى المخرج."
+      },
+      "model": "fluid_cent_single_pressure.glb"
+    },
+    {
+      "deviceId": "cent_single",
+      "deviceName": "Single-Stage Centrifugal Pump",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Viscous fluid motion inside the pump",
+        "ar": "ثانياً: حركة المائع اللزج داخل المضخة"
+      },
+      "description": {
+        "en": "See how a viscous liquid moves through the pump and how it differs from water.",
+        "ar": "شاهد كيف يتحرك سائل لزج عبر المضخة وبماذا يختلف عن الماء."
+      },
+      "model": "fluid_cent_single_viscous.glb"
+    },
+    {
+      "deviceId": "cent_single",
+      "deviceName": "Single-Stage Centrifugal Pump",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Single-Stage Centrifugal Pump, exploded view",
+        "ar": "أولاً: مضخة طرد مركزي أحادية المرحلة، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Single-Stage Centrifugal Pump part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء مضخة طرد مركزي أحادية المرحلة قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_cent_single.glb"
+    },
+    {
+      "deviceId": "cent_multi",
+      "deviceName": "Multi-Stage Centrifugal Pump",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Fluid motion with pressure gradients inside the pump",
+        "ar": "أولاً: حركة المائع وتدرجات الضغط داخل المضخة"
+      },
+      "description": {
+        "en": "Follow the liquid through the pump and see how pressure builds from inlet to outlet.",
+        "ar": "تتبّع السائل عبر المضخة وشاهد كيف يتزايد الضغط من المدخل إلى المخرج."
+      },
+      "model": "fluid_cent_multi_pressure.glb"
+    },
+    {
+      "deviceId": "cent_multi",
+      "deviceName": "Multi-Stage Centrifugal Pump",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Viscous fluid motion inside the pump",
+        "ar": "ثانياً: حركة المائع اللزج داخل المضخة"
+      },
+      "description": {
+        "en": "See how a viscous liquid moves through the pump and how it differs from water.",
+        "ar": "شاهد كيف يتحرك سائل لزج عبر المضخة وبماذا يختلف عن الماء."
+      },
+      "model": "fluid_cent_multi_viscous.glb"
+    },
+    {
+      "deviceId": "cent_multi",
+      "deviceName": "Multi-Stage Centrifugal Pump",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Multi-Stage Centrifugal Pump, exploded view",
+        "ar": "أولاً: مضخة طرد مركزي متعددة المراحل، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Multi-Stage Centrifugal Pump part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء مضخة طرد مركزي متعددة المراحل قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_cent_multi.glb"
+    },
+    {
+      "deviceId": "sump",
+      "deviceName": "Vertical Sump Pump",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Fluid motion with pressure gradients inside the pump",
+        "ar": "أولاً: حركة المائع وتدرجات الضغط داخل المضخة"
+      },
+      "description": {
+        "en": "Follow the liquid through the pump and see how pressure builds from inlet to outlet.",
+        "ar": "تتبّع السائل عبر المضخة وشاهد كيف يتزايد الضغط من المدخل إلى المخرج."
+      },
+      "model": "fluid_sump_pressure.glb"
+    },
+    {
+      "deviceId": "sump",
+      "deviceName": "Vertical Sump Pump",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Viscous fluid motion inside the pump",
+        "ar": "ثانياً: حركة المائع اللزج داخل المضخة"
+      },
+      "description": {
+        "en": "See how a viscous liquid moves through the pump and how it differs from water.",
+        "ar": "شاهد كيف يتحرك سائل لزج عبر المضخة وبماذا يختلف عن الماء."
+      },
+      "model": "fluid_sump_viscous.glb"
+    },
+    {
+      "deviceId": "sump",
+      "deviceName": "Vertical Sump Pump",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Vertical Sump Pump, exploded view",
+        "ar": "أولاً: مضخة بالوعة عمودية، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Vertical Sump Pump part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء مضخة بالوعة عمودية قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_sump.glb"
+    },
+    {
+      "deviceId": "axial",
+      "deviceName": "Axial Flow Pump",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Fluid motion with pressure gradients inside the pump",
+        "ar": "أولاً: حركة المائع وتدرجات الضغط داخل المضخة"
+      },
+      "description": {
+        "en": "Follow the liquid through the pump and see how pressure builds from inlet to outlet.",
+        "ar": "تتبّع السائل عبر المضخة وشاهد كيف يتزايد الضغط من المدخل إلى المخرج."
+      },
+      "model": "fluid_axial_pressure.glb"
+    },
+    {
+      "deviceId": "axial",
+      "deviceName": "Axial Flow Pump",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Viscous fluid motion inside the pump",
+        "ar": "ثانياً: حركة المائع اللزج داخل المضخة"
+      },
+      "description": {
+        "en": "See how a viscous liquid moves through the pump and how it differs from water.",
+        "ar": "شاهد كيف يتحرك سائل لزج عبر المضخة وبماذا يختلف عن الماء."
+      },
+      "model": "fluid_axial_viscous.glb"
+    },
+    {
+      "deviceId": "axial",
+      "deviceName": "Axial Flow Pump",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Axial Flow Pump, exploded view",
+        "ar": "أولاً: مضخة تدفق محوري، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Axial Flow Pump part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء مضخة تدفق محوري قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_axial.glb"
+    },
+    {
+      "deviceId": "gear",
+      "deviceName": "Gear Pump (Rotary)",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Fluid motion with pressure gradients inside the pump",
+        "ar": "أولاً: حركة المائع وتدرجات الضغط داخل المضخة"
+      },
+      "description": {
+        "en": "Follow the liquid through the pump and see how pressure builds from inlet to outlet.",
+        "ar": "تتبّع السائل عبر المضخة وشاهد كيف يتزايد الضغط من المدخل إلى المخرج."
+      },
+      "model": "fluid_gear_pressure.glb"
+    },
+    {
+      "deviceId": "gear",
+      "deviceName": "Gear Pump (Rotary)",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Viscous fluid motion inside the pump",
+        "ar": "ثانياً: حركة المائع اللزج داخل المضخة"
+      },
+      "description": {
+        "en": "See how a viscous liquid moves through the pump and how it differs from water.",
+        "ar": "شاهد كيف يتحرك سائل لزج عبر المضخة وبماذا يختلف عن الماء."
+      },
+      "model": "fluid_gear_viscous.glb"
+    },
+    {
+      "deviceId": "gear",
+      "deviceName": "Gear Pump (Rotary)",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Gear Pump (Rotary), exploded view",
+        "ar": "أولاً: مضخة تروس (دوّارة)، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Gear Pump (Rotary) part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء مضخة تروس (دوّارة) قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_gear.glb"
+    },
+    {
+      "deviceId": "screw",
+      "deviceName": "Screw Pump (Rotary)",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Fluid motion with pressure gradients inside the pump",
+        "ar": "أولاً: حركة المائع وتدرجات الضغط داخل المضخة"
+      },
+      "description": {
+        "en": "Follow the liquid through the pump and see how pressure builds from inlet to outlet.",
+        "ar": "تتبّع السائل عبر المضخة وشاهد كيف يتزايد الضغط من المدخل إلى المخرج."
+      },
+      "model": "fluid_screw_pressure.glb"
+    },
+    {
+      "deviceId": "screw",
+      "deviceName": "Screw Pump (Rotary)",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Viscous fluid motion inside the pump",
+        "ar": "ثانياً: حركة المائع اللزج داخل المضخة"
+      },
+      "description": {
+        "en": "See how a viscous liquid moves through the pump and how it differs from water.",
+        "ar": "شاهد كيف يتحرك سائل لزج عبر المضخة وبماذا يختلف عن الماء."
+      },
+      "model": "fluid_screw_viscous.glb"
+    },
+    {
+      "deviceId": "screw",
+      "deviceName": "Screw Pump (Rotary)",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Screw Pump (Rotary), exploded view",
+        "ar": "أولاً: مضخة لولبية (دوّارة)، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Screw Pump (Rotary) part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء مضخة لولبية (دوّارة) قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_screw.glb"
+    },
+    {
+      "deviceId": "piston",
+      "deviceName": "Piston / Plunger Pump (Reciprocating)",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Fluid motion with pressure gradients inside the pump",
+        "ar": "أولاً: حركة المائع وتدرجات الضغط داخل المضخة"
+      },
+      "description": {
+        "en": "Follow the liquid through the pump and see how pressure builds from inlet to outlet.",
+        "ar": "تتبّع السائل عبر المضخة وشاهد كيف يتزايد الضغط من المدخل إلى المخرج."
+      },
+      "model": "fluid_piston_pressure.glb"
+    },
+    {
+      "deviceId": "piston",
+      "deviceName": "Piston / Plunger Pump (Reciprocating)",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Viscous fluid motion inside the pump",
+        "ar": "ثانياً: حركة المائع اللزج داخل المضخة"
+      },
+      "description": {
+        "en": "See how a viscous liquid moves through the pump and how it differs from water.",
+        "ar": "شاهد كيف يتحرك سائل لزج عبر المضخة وبماذا يختلف عن الماء."
+      },
+      "model": "fluid_piston_viscous.glb"
+    },
+    {
+      "deviceId": "piston",
+      "deviceName": "Piston / Plunger Pump (Reciprocating)",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Piston / Plunger Pump (Reciprocating), exploded view",
+        "ar": "أولاً: مضخة مكبسية (ترددية)، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Piston / Plunger Pump (Reciprocating) part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء مضخة مكبسية (ترددية) قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_piston.glb"
+    },
+    {
+      "deviceId": "diaphragm",
+      "deviceName": "Diaphragm Pump (Reciprocating)",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Fluid motion with pressure gradients inside the pump",
+        "ar": "أولاً: حركة المائع وتدرجات الضغط داخل المضخة"
+      },
+      "description": {
+        "en": "Follow the liquid through the pump and see how pressure builds from inlet to outlet.",
+        "ar": "تتبّع السائل عبر المضخة وشاهد كيف يتزايد الضغط من المدخل إلى المخرج."
+      },
+      "model": "fluid_diaphragm_pressure.glb"
+    },
+    {
+      "deviceId": "diaphragm",
+      "deviceName": "Diaphragm Pump (Reciprocating)",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Viscous fluid motion inside the pump",
+        "ar": "ثانياً: حركة المائع اللزج داخل المضخة"
+      },
+      "description": {
+        "en": "See how a viscous liquid moves through the pump and how it differs from water.",
+        "ar": "شاهد كيف يتحرك سائل لزج عبر المضخة وبماذا يختلف عن الماء."
+      },
+      "model": "fluid_diaphragm_viscous.glb"
+    },
+    {
+      "deviceId": "diaphragm",
+      "deviceName": "Diaphragm Pump (Reciprocating)",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Diaphragm Pump (Reciprocating), exploded view",
+        "ar": "أولاً: مضخة غشائية (ترددية)، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Diaphragm Pump (Reciprocating) part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء مضخة غشائية (ترددية) قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_diaphragm.glb"
+    },
+    {
+      "deviceId": "recip",
+      "deviceName": "Reciprocating (Piston) Compressor",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Gas flow with pressure rise inside the compressor",
+        "ar": "أولاً: جريان الغاز وارتفاع الضغط داخل الضاغط"
+      },
+      "description": {
+        "en": "Follow the gas through the compressor and see how pressure rises from suction to discharge.",
+        "ar": "تتبّع الغاز عبر الضاغط وشاهد كيف يرتفع الضغط من السحب إلى التفريغ."
+      },
+      "model": "fluid_recip_pressure.glb"
+    },
+    {
+      "deviceId": "recip",
+      "deviceName": "Reciprocating (Piston) Compressor",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Velocity field and flow behaviour inside the compressor",
+        "ar": "ثانياً: مجال السرعة وسلوك الجريان داخل الضاغط"
+      },
+      "description": {
+        "en": "See how the gas speeds up, slows down and swirls as it moves through the machine.",
+        "ar": "شاهد كيف يتسارع الغاز ويتباطأ ويدور أثناء مروره داخل الماكينة."
+      },
+      "model": "fluid_recip_velocity.glb"
+    },
+    {
+      "deviceId": "recip",
+      "deviceName": "Reciprocating (Piston) Compressor",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Reciprocating (Piston) Compressor, exploded view",
+        "ar": "أولاً: ضاغط ترددي (مكبسي)، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Reciprocating (Piston) Compressor part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء ضاغط ترددي (مكبسي) قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_recip.glb"
+    },
+    {
+      "deviceId": "rscrew",
+      "deviceName": "Rotary Screw Compressor",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Gas flow with pressure rise inside the compressor",
+        "ar": "أولاً: جريان الغاز وارتفاع الضغط داخل الضاغط"
+      },
+      "description": {
+        "en": "Follow the gas through the compressor and see how pressure rises from suction to discharge.",
+        "ar": "تتبّع الغاز عبر الضاغط وشاهد كيف يرتفع الضغط من السحب إلى التفريغ."
+      },
+      "model": "fluid_rscrew_pressure.glb"
+    },
+    {
+      "deviceId": "rscrew",
+      "deviceName": "Rotary Screw Compressor",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Velocity field and flow behaviour inside the compressor",
+        "ar": "ثانياً: مجال السرعة وسلوك الجريان داخل الضاغط"
+      },
+      "description": {
+        "en": "See how the gas speeds up, slows down and swirls as it moves through the machine.",
+        "ar": "شاهد كيف يتسارع الغاز ويتباطأ ويدور أثناء مروره داخل الماكينة."
+      },
+      "model": "fluid_rscrew_velocity.glb"
+    },
+    {
+      "deviceId": "rscrew",
+      "deviceName": "Rotary Screw Compressor",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Rotary Screw Compressor, exploded view",
+        "ar": "أولاً: ضاغط لولبي دوّار، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Rotary Screw Compressor part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء ضاغط لولبي دوّار قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_rscrew.glb"
+    },
+    {
+      "deviceId": "scroll",
+      "deviceName": "Scroll Compressor",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Gas flow with pressure rise inside the compressor",
+        "ar": "أولاً: جريان الغاز وارتفاع الضغط داخل الضاغط"
+      },
+      "description": {
+        "en": "Follow the gas through the compressor and see how pressure rises from suction to discharge.",
+        "ar": "تتبّع الغاز عبر الضاغط وشاهد كيف يرتفع الضغط من السحب إلى التفريغ."
+      },
+      "model": "fluid_scroll_pressure.glb"
+    },
+    {
+      "deviceId": "scroll",
+      "deviceName": "Scroll Compressor",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Velocity field and flow behaviour inside the compressor",
+        "ar": "ثانياً: مجال السرعة وسلوك الجريان داخل الضاغط"
+      },
+      "description": {
+        "en": "See how the gas speeds up, slows down and swirls as it moves through the machine.",
+        "ar": "شاهد كيف يتسارع الغاز ويتباطأ ويدور أثناء مروره داخل الماكينة."
+      },
+      "model": "fluid_scroll_velocity.glb"
+    },
+    {
+      "deviceId": "scroll",
+      "deviceName": "Scroll Compressor",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Scroll Compressor, exploded view",
+        "ar": "أولاً: ضاغط حلزوني (سكرول)، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Scroll Compressor part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء ضاغط حلزوني (سكرول) قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_scroll.glb"
+    },
+    {
+      "deviceId": "ccomp",
+      "deviceName": "Centrifugal Compressor",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Gas flow with pressure rise inside the compressor",
+        "ar": "أولاً: جريان الغاز وارتفاع الضغط داخل الضاغط"
+      },
+      "description": {
+        "en": "Follow the gas through the compressor and see how pressure rises from suction to discharge.",
+        "ar": "تتبّع الغاز عبر الضاغط وشاهد كيف يرتفع الضغط من السحب إلى التفريغ."
+      },
+      "model": "fluid_ccomp_pressure.glb"
+    },
+    {
+      "deviceId": "ccomp",
+      "deviceName": "Centrifugal Compressor",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Velocity field and flow behaviour inside the compressor",
+        "ar": "ثانياً: مجال السرعة وسلوك الجريان داخل الضاغط"
+      },
+      "description": {
+        "en": "See how the gas speeds up, slows down and swirls as it moves through the machine.",
+        "ar": "شاهد كيف يتسارع الغاز ويتباطأ ويدور أثناء مروره داخل الماكينة."
+      },
+      "model": "fluid_ccomp_velocity.glb"
+    },
+    {
+      "deviceId": "ccomp",
+      "deviceName": "Centrifugal Compressor",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Centrifugal Compressor, exploded view",
+        "ar": "أولاً: ضاغط طرد مركزي، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Centrifugal Compressor part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء ضاغط طرد مركزي قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_ccomp.glb"
+    },
+    {
+      "deviceId": "acomp",
+      "deviceName": "Axial Compressor",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Gas flow with pressure rise inside the compressor",
+        "ar": "أولاً: جريان الغاز وارتفاع الضغط داخل الضاغط"
+      },
+      "description": {
+        "en": "Follow the gas through the compressor and see how pressure rises from suction to discharge.",
+        "ar": "تتبّع الغاز عبر الضاغط وشاهد كيف يرتفع الضغط من السحب إلى التفريغ."
+      },
+      "model": "fluid_acomp_pressure.glb"
+    },
+    {
+      "deviceId": "acomp",
+      "deviceName": "Axial Compressor",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Velocity field and flow behaviour inside the compressor",
+        "ar": "ثانياً: مجال السرعة وسلوك الجريان داخل الضاغط"
+      },
+      "description": {
+        "en": "See how the gas speeds up, slows down and swirls as it moves through the machine.",
+        "ar": "شاهد كيف يتسارع الغاز ويتباطأ ويدور أثناء مروره داخل الماكينة."
+      },
+      "model": "fluid_acomp_velocity.glb"
+    },
+    {
+      "deviceId": "acomp",
+      "deviceName": "Axial Compressor",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Axial Compressor, exploded view",
+        "ar": "أولاً: ضاغط محوري، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Axial Compressor part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء ضاغط محوري قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_acomp.glb"
+    },
+    {
+      "deviceId": "gate",
+      "deviceName": "Gate Valve",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Fluid motion with pressure drop through the valve",
+        "ar": "أولاً: حركة المائع وهبوط الضغط عبر الصمام"
+      },
+      "description": {
+        "en": "See how pressure falls as the fluid squeezes through the valve.",
+        "ar": "شاهد كيف ينخفض الضغط عندما يضغط المائع نفسه عبر الصمام."
+      },
+      "model": "fluid_gate_pressure_drop.glb"
+    },
+    {
+      "deviceId": "gate",
+      "deviceName": "Gate Valve",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Flow patterns at different valve openings",
+        "ar": "ثانياً: أنماط الجريان عند فتحات الصمام المختلفة"
+      },
+      "description": {
+        "en": "Compare how the flow behaves when the valve is nearly closed, half open and fully open.",
+        "ar": "قارن سلوك الجريان عندما يكون الصمام شبه مغلق ونصف مفتوح ومفتوحاً بالكامل."
+      },
+      "model": "fluid_gate_openings.glb"
+    },
+    {
+      "deviceId": "gate",
+      "deviceName": "Gate Valve",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Gate Valve, exploded view",
+        "ar": "أولاً: صمام بوابة، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Gate Valve part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء صمام بوابة قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_gate.glb"
+    },
+    {
+      "deviceId": "ball",
+      "deviceName": "Ball Valve",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Fluid motion with pressure drop through the valve",
+        "ar": "أولاً: حركة المائع وهبوط الضغط عبر الصمام"
+      },
+      "description": {
+        "en": "See how pressure falls as the fluid squeezes through the valve.",
+        "ar": "شاهد كيف ينخفض الضغط عندما يضغط المائع نفسه عبر الصمام."
+      },
+      "model": "fluid_ball_pressure_drop.glb"
+    },
+    {
+      "deviceId": "ball",
+      "deviceName": "Ball Valve",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Flow patterns at different valve openings",
+        "ar": "ثانياً: أنماط الجريان عند فتحات الصمام المختلفة"
+      },
+      "description": {
+        "en": "Compare how the flow behaves when the valve is nearly closed, half open and fully open.",
+        "ar": "قارن سلوك الجريان عندما يكون الصمام شبه مغلق ونصف مفتوح ومفتوحاً بالكامل."
+      },
+      "model": "fluid_ball_openings.glb"
+    },
+    {
+      "deviceId": "ball",
+      "deviceName": "Ball Valve",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Ball Valve, exploded view",
+        "ar": "أولاً: صمام كروي، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Ball Valve part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء صمام كروي قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_ball.glb"
+    },
+    {
+      "deviceId": "globe",
+      "deviceName": "Globe Valve",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Fluid motion with pressure drop through the valve",
+        "ar": "أولاً: حركة المائع وهبوط الضغط عبر الصمام"
+      },
+      "description": {
+        "en": "See how pressure falls as the fluid squeezes through the valve.",
+        "ar": "شاهد كيف ينخفض الضغط عندما يضغط المائع نفسه عبر الصمام."
+      },
+      "model": "fluid_globe_pressure_drop.glb"
+    },
+    {
+      "deviceId": "globe",
+      "deviceName": "Globe Valve",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Flow patterns at different valve openings",
+        "ar": "ثانياً: أنماط الجريان عند فتحات الصمام المختلفة"
+      },
+      "description": {
+        "en": "Compare how the flow behaves when the valve is nearly closed, half open and fully open.",
+        "ar": "قارن سلوك الجريان عندما يكون الصمام شبه مغلق ونصف مفتوح ومفتوحاً بالكامل."
+      },
+      "model": "fluid_globe_openings.glb"
+    },
+    {
+      "deviceId": "globe",
+      "deviceName": "Globe Valve",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Globe Valve, exploded view",
+        "ar": "أولاً: صمام كروي المقعد (جلوب)، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Globe Valve part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء صمام كروي المقعد (جلوب) قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_globe.glb"
+    },
+    {
+      "deviceId": "needle",
+      "deviceName": "Needle Valve",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Fluid motion with pressure drop through the valve",
+        "ar": "أولاً: حركة المائع وهبوط الضغط عبر الصمام"
+      },
+      "description": {
+        "en": "See how pressure falls as the fluid squeezes through the valve.",
+        "ar": "شاهد كيف ينخفض الضغط عندما يضغط المائع نفسه عبر الصمام."
+      },
+      "model": "fluid_needle_pressure_drop.glb"
+    },
+    {
+      "deviceId": "needle",
+      "deviceName": "Needle Valve",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Flow patterns at different valve openings",
+        "ar": "ثانياً: أنماط الجريان عند فتحات الصمام المختلفة"
+      },
+      "description": {
+        "en": "Compare how the flow behaves when the valve is nearly closed, half open and fully open.",
+        "ar": "قارن سلوك الجريان عندما يكون الصمام شبه مغلق ونصف مفتوح ومفتوحاً بالكامل."
+      },
+      "model": "fluid_needle_openings.glb"
+    },
+    {
+      "deviceId": "needle",
+      "deviceName": "Needle Valve",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Needle Valve, exploded view",
+        "ar": "أولاً: صمام إبرة، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Needle Valve part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء صمام إبرة قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_needle.glb"
+    },
+    {
+      "deviceId": "swing",
+      "deviceName": "Swing Check Valve",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Fluid motion with pressure drop through the valve",
+        "ar": "أولاً: حركة المائع وهبوط الضغط عبر الصمام"
+      },
+      "description": {
+        "en": "See how pressure falls as the fluid squeezes through the valve.",
+        "ar": "شاهد كيف ينخفض الضغط عندما يضغط المائع نفسه عبر الصمام."
+      },
+      "model": "fluid_swing_pressure_drop.glb"
+    },
+    {
+      "deviceId": "swing",
+      "deviceName": "Swing Check Valve",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Flow patterns at different valve openings",
+        "ar": "ثانياً: أنماط الجريان عند فتحات الصمام المختلفة"
+      },
+      "description": {
+        "en": "Compare how the flow behaves when the valve is nearly closed, half open and fully open.",
+        "ar": "قارن سلوك الجريان عندما يكون الصمام شبه مغلق ونصف مفتوح ومفتوحاً بالكامل."
+      },
+      "model": "fluid_swing_openings.glb"
+    },
+    {
+      "deviceId": "swing",
+      "deviceName": "Swing Check Valve",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Swing Check Valve, exploded view",
+        "ar": "أولاً: صمام عدم رجوع مرجحي، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Swing Check Valve part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء صمام عدم رجوع مرجحي قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_swing.glb"
+    },
+    {
+      "deviceId": "lift",
+      "deviceName": "Lift Check Valve",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Fluid motion with pressure drop through the valve",
+        "ar": "أولاً: حركة المائع وهبوط الضغط عبر الصمام"
+      },
+      "description": {
+        "en": "See how pressure falls as the fluid squeezes through the valve.",
+        "ar": "شاهد كيف ينخفض الضغط عندما يضغط المائع نفسه عبر الصمام."
+      },
+      "model": "fluid_lift_pressure_drop.glb"
+    },
+    {
+      "deviceId": "lift",
+      "deviceName": "Lift Check Valve",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Flow patterns at different valve openings",
+        "ar": "ثانياً: أنماط الجريان عند فتحات الصمام المختلفة"
+      },
+      "description": {
+        "en": "Compare how the flow behaves when the valve is nearly closed, half open and fully open.",
+        "ar": "قارن سلوك الجريان عندما يكون الصمام شبه مغلق ونصف مفتوح ومفتوحاً بالكامل."
+      },
+      "model": "fluid_lift_openings.glb"
+    },
+    {
+      "deviceId": "lift",
+      "deviceName": "Lift Check Valve",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Lift Check Valve, exploded view",
+        "ar": "أولاً: صمام عدم رجوع رافع، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Lift Check Valve part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء صمام عدم رجوع رافع قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_lift.glb"
+    },
+    {
+      "deviceId": "safety",
+      "deviceName": "Safety Valve",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Fluid motion with pressure drop through the valve",
+        "ar": "أولاً: حركة المائع وهبوط الضغط عبر الصمام"
+      },
+      "description": {
+        "en": "See how pressure falls as the fluid squeezes through the valve.",
+        "ar": "شاهد كيف ينخفض الضغط عندما يضغط المائع نفسه عبر الصمام."
+      },
+      "model": "fluid_safety_pressure_drop.glb"
+    },
+    {
+      "deviceId": "safety",
+      "deviceName": "Safety Valve",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Flow patterns at different valve openings",
+        "ar": "ثانياً: أنماط الجريان عند فتحات الصمام المختلفة"
+      },
+      "description": {
+        "en": "Compare how the flow behaves when the valve is nearly closed, half open and fully open.",
+        "ar": "قارن سلوك الجريان عندما يكون الصمام شبه مغلق ونصف مفتوح ومفتوحاً بالكامل."
+      },
+      "model": "fluid_safety_openings.glb"
+    },
+    {
+      "deviceId": "safety",
+      "deviceName": "Safety Valve",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Safety Valve, exploded view",
+        "ar": "أولاً: صمام أمان، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Safety Valve part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء صمام أمان قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_safety.glb"
+    },
+    {
+      "deviceId": "relief",
+      "deviceName": "Relief Valve",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Fluid motion with pressure drop through the valve",
+        "ar": "أولاً: حركة المائع وهبوط الضغط عبر الصمام"
+      },
+      "description": {
+        "en": "See how pressure falls as the fluid squeezes through the valve.",
+        "ar": "شاهد كيف ينخفض الضغط عندما يضغط المائع نفسه عبر الصمام."
+      },
+      "model": "fluid_relief_pressure_drop.glb"
+    },
+    {
+      "deviceId": "relief",
+      "deviceName": "Relief Valve",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Flow patterns at different valve openings",
+        "ar": "ثانياً: أنماط الجريان عند فتحات الصمام المختلفة"
+      },
+      "description": {
+        "en": "Compare how the flow behaves when the valve is nearly closed, half open and fully open.",
+        "ar": "قارن سلوك الجريان عندما يكون الصمام شبه مغلق ونصف مفتوح ومفتوحاً بالكامل."
+      },
+      "model": "fluid_relief_openings.glb"
+    },
+    {
+      "deviceId": "relief",
+      "deviceName": "Relief Valve",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Relief Valve, exploded view",
+        "ar": "أولاً: صمام تنفيس، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Relief Valve part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء صمام تنفيس قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_relief.glb"
+    },
+    {
+      "deviceId": "choke",
+      "deviceName": "Choke Valve (API 6A)",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Fluid motion with pressure drop through the valve",
+        "ar": "أولاً: حركة المائع وهبوط الضغط عبر الصمام"
+      },
+      "description": {
+        "en": "See how pressure falls as the fluid squeezes through the valve.",
+        "ar": "شاهد كيف ينخفض الضغط عندما يضغط المائع نفسه عبر الصمام."
+      },
+      "model": "fluid_choke_pressure_drop.glb"
+    },
+    {
+      "deviceId": "choke",
+      "deviceName": "Choke Valve (API 6A)",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Flow patterns at different valve openings",
+        "ar": "ثانياً: أنماط الجريان عند فتحات الصمام المختلفة"
+      },
+      "description": {
+        "en": "Compare how the flow behaves when the valve is nearly closed, half open and fully open.",
+        "ar": "قارن سلوك الجريان عندما يكون الصمام شبه مغلق ونصف مفتوح ومفتوحاً بالكامل."
+      },
+      "model": "fluid_choke_openings.glb"
+    },
+    {
+      "deviceId": "choke",
+      "deviceName": "Choke Valve (API 6A)",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Choke Valve (API 6A), exploded view",
+        "ar": "أولاً: صمام خانق (API 6A)، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Choke Valve (API 6A) part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء صمام خانق (API 6A) قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_choke.glb"
+    },
+    {
+      "deviceId": "esd",
+      "deviceName": "Emergency Shutdown Valve (ESD / API 6D)",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "First: Fluid motion with pressure drop through the valve",
+        "ar": "أولاً: حركة المائع وهبوط الضغط عبر الصمام"
+      },
+      "description": {
+        "en": "See how pressure falls as the fluid squeezes through the valve.",
+        "ar": "شاهد كيف ينخفض الضغط عندما يضغط المائع نفسه عبر الصمام."
+      },
+      "model": "fluid_esd_pressure_drop.glb"
+    },
+    {
+      "deviceId": "esd",
+      "deviceName": "Emergency Shutdown Valve (ESD / API 6D)",
+      "section": "fluid-dynamics",
+      "title": {
+        "en": "Second: Flow patterns at different valve openings",
+        "ar": "ثانياً: أنماط الجريان عند فتحات الصمام المختلفة"
+      },
+      "description": {
+        "en": "Compare how the flow behaves when the valve is nearly closed, half open and fully open.",
+        "ar": "قارن سلوك الجريان عندما يكون الصمام شبه مغلق ونصف مفتوح ومفتوحاً بالكامل."
+      },
+      "model": "fluid_esd_openings.glb"
+    },
+    {
+      "deviceId": "esd",
+      "deviceName": "Emergency Shutdown Valve (ESD / API 6D)",
+      "section": "exploded-view",
+      "title": {
+        "en": "First: Emergency Shutdown Valve (ESD / API 6D), exploded view",
+        "ar": "أولاً: صمام الإغلاق الطارئ (ESD / API 6D)، منظر مفكّك"
+      },
+      "description": {
+        "en": "Separate the Emergency Shutdown Valve (ESD / API 6D) part by part and see how the assembly fits together.",
+        "ar": "افصل أجزاء صمام الإغلاق الطارئ (ESD / API 6D) قطعةً قطعة وشاهد كيف يتركّب التجميع."
+      },
+      "model": "exploded_esd.glb"
+    }
+  ]
+}
